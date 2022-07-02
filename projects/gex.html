@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gex Quote Generator | bluedragon8633</title>
+</head>
+<body>
+    <h2>Gex Quote Generator!</h2>
+    <p>
+        I haven't seen references like this since drinking Jamba Juice on Jack Nicholson's porch!
+    </p>
+
+    <button onclick="getGexQuote()">
+        Generate
+    </button>
+
+    <p id="quote">
+    </p>
+
+    <script>
+        const people = ["Chuck Schumer","JFK","my dog","Jerry Seinfeld","Charles Martinet","Jeremy Scott","Rowan Atkinson","Mark Hamill","Paul McCartney"];
+        const verbs = ["organizing the tupperware","game night","stripping the paint","taking a bath","Easter","making the bed","doing the laundry","partying","gyrating","drilling holes","paying the mortgage","filing tax returns"];
+        const houses = ["house","place","porch","mansion","bungalow","cottage","bedroom","shower","kitchen","attic","yacht","office","husband's house","apartment","condo","condominium"];
+        const beginnings = ["This is like ","This reminds me of ","I haven't felt this "];
+        const feelings = ["happy","bored","frightened","irritated","sleepy","worried","excited","provoked"];
+        function getGexQuote() {
+            let startingID = Math.floor(Math.random()*beginnings.length);
+            if (startingID == 0 || startingID == 1) {
+                document.getElementById("quote").innerHTML = beginnings[startingID].concat(verbs[Math.floor(Math.random()*verbs.length)]+" at "+people[Math.floor(Math.random()*people.length)]+"'s "+houses[Math.floor(Math.random()*houses.length)]+"!");
+            } else if (startingID == 2) {
+                document.getElementById("quote").innerHTML = beginnings[startingID].concat(feelings[Math.floor(Math.random()*feelings.length)]+" since "+verbs[Math.floor(Math.random()*verbs.length)]+" at "+people[Math.floor(Math.random()*people.length)]+"'s "+houses[Math.floor(Math.random()*houses.length)]+"!");
+            }
+        }
+    </script>
+</body>
+</html>

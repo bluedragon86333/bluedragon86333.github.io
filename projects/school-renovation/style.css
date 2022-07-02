@@ -2,3 +2,6 @@
   text-align: center;
   border: 3px solid green;
 }
+.DisplayImg img {
+	max-width:80%;
+}

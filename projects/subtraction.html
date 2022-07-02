@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Title here</title>
+    <style>
+        .Center {
+            padding-top:20px;
+            padding-bottom:20px;
+            text-align-last: center;
+            border: 2px solid black;
+            width:60%;
+            margin-left:20%;
+        }
+        
+        .StartButton {
+            width:256px;
+            height:48px;
+            font-size:24px;
+        }
+        
+        .Footnote {
+            font-size:12px;
+        }
+		li {
+			list-style:none;
+		}
+    </style>
+</head>
+
+<body>
+
+    
+    <div class="Center">
+        <h1>Math Practice</h1>
+        <p class="Footnote">Made by bluedragon8633</p>
+        
+        <div class="Section">
+            <h2>Double Digit Subtraction</h2>
+            <p>Subtracting single-digit numbers from numbers 10 to 19.</p>
+            <button class="StartButton" onclick="makeSub()">Start!</button>
+        </div>
+        <div class="Problem">
+			<ul>
+				<li id="topnum"></li>
+				<li id="bottomnum"></li>
+				<form>
+					<input type="number" id="numberInput">
+				</form>
+				<li id="gradeIndicator"></li>
+			</ul>
+        </div>
+        
+    </div>
+
+    
+    <script>
+		const numberIn = document.querySelector('#numberInput');
+		var num1 = 0;
+		var num2 = 0;
+		var score = 0;
+		var problemsRemaining = 3;
+        function makeSub() {
+            num1 = Math.floor(Math.random()*10+10);
+            num2 = Math.floor(Math.random()*10);
+            document.getElementById("topnum").innerHTML = num1;
+            document.getElementById("bottomnum").innerHTML = num2;
+        }
+		
+		function processIn() {
+			let answer = numberIn.value;
+			if (answer == num1 - num2) {
+				document.getElementById("gradeIndicator").innerHTML = "Correct!";
+			} else {
+				let returnThis = "Wrong! Correct Answer: ";
+				returnThis = returnThis.concat(num1 - num2);
+				document.getElementById("gradeIndicator").innerHTML = returnThis;
+			}
+		}
+    </script>
+</body>
+</html>

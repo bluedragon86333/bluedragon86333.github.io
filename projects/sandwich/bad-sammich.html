@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bocadillo Malo | Bocadillos del Infierno</title>
+	<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+	<p><a href="./tutorial.html">Instrucciones</a></p>
+	<p><a href="./index.html">Casa</a></p>
+	<p><a href="./make-sandwich.html">Un otro Sandwich</a></p>
+	<audio controls src="" id="badAudio"></audio>
+	<script>
+		let b = document.getElementById("badAudio");
+		let num = Math.floor(Math.random() * 7) + 1;
+		b.src = "bad sandwich " + num + ".mp3"
+	</script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Haga un Sandwich | Bocadillos del Infierno</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div class="CenteredBody">
+	<p><a href="./tutorial.html">Instrucciones</a></p>
+	<p><a href="./index.html">Casa</a></p>
+	<button id="goodSammichButton" onclick="makeGoodSandwich()">Bocadillo Bueno</button>
+	<button id="badSammichButton" onclick="makeShitSandwich()">Bocadillo Malo</button>
+	<p id="SammichIndicator">No hay un sandwich ahora. </p>
+	<ul>
+		<li><img id="breadImg" class="FoodImg" src=""></li>
+		<li><audio controls src="" type="audio/mpeg" id="breadAux">Your browser does not support the audio element.</audio></li>
+		<li><img id="veggie1Img" class="FoodImg" src=""></li>
+		<li><audio controls src="" type="audio/mpeg" id="veggie1Aux">Your browser does not support the audio element.</audio></li>
+		<li><img id="veggie2Img" class="FoodImg" src=""></li>
+		<li><audio controls src="" type="audio/mpeg" id="veggie2Aux">Your browser does not support the audio element.</audio></li>
+		<li><img id="veggie3Img" class="FoodImg" src=""></li>
+		<li><audio controls src="" type="audio/mpeg" id="veggie3Aux">Your browser does not support the audio element.</audio></li>
+		<li><img id="meat1Img" class="FoodImg" src=""></li>
+		<li><audio controls src="" type="audio/mpeg" id="meat1Aux">Your browser does not support the audio element.</audio></li>
+		<li><img id="meat2Img" class="FoodImg" src=""></li>
+		<li><audio controls src="" type="audio/mpeg" id="meat2Aux">Your browser does not support the audio element.</audio></li>
+		<li><img id="cheeseImg" class="FoodImg" src=""></li>
+		<li><audio controls src="" type="audio/mpeg" id="cheeseAux">Your browser does not support the audio element.</audio></li>
+		<li><img id="eggImg" class="FoodImg" src=""></li>
+		<li><audio controls src="" type="audio/mpeg" id="eggAux">Your browser does not support the audio element.</audio></li>
+		<li><audio controls src="" type="audio/mpeg" id="saltAux">Your browser does not support the audio element.</audio></li>
+	</ul>
+    <script>
+        const cheese = ["azul","cheddar","brie","feta","ahumado"];
+        const vegetables = ["pepinos","zanahorias","lechuga","pimiento","patatas","aguacate","tomate"];
+        const breads = ["brioche","focaccia","blanco","focaccia","tortilla"];
+        const meats = ["carne de res","pollo","chorizo","pescado","cangrejo"];
+		
+		const condiments = ["sal","pimienta","mayonesa","mantequilla", "ajo","vinagre","salsa picante","aceite de oliva"];
+		const animals = ["dog","cat","hippo","gorilla","horse","cow","your mom's","goat","rat","skunk","badger","kangaroo"];
+		const shittyIngredients = ["dedos de tu nino primero",""];
+		
+		const eggPic = "data:image/jpeg;base64,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";
+		const cheesePic = "https://iheartcraftythings.com/wp-content/uploads/2022/01/6-65.jpg";
+		const fishPic = "https://w7.pngwing.com/pngs/7/786/png-transparent-salmon-free-content-fish-gold-medal-leaf-computer-wallpaper-cartoon.png";
+		const breadPic = "https://d2gg9evh47fn9z.cloudfront.net/1600px_COLOURBOX5232429.jpg";
+		const toastPic = "https://s3-eu-central-1.amazonaws.com/cartoons-s3/styles/product_detail_image/s3/cartoons/2019/12/toast__glen_le_lievre.jpg?itok=a2tnMRER";
+		const cucumberPic = "https://charatoon.com/photo/3969.png";
+		const carrotPic = "https://cdn.dribbble.com/users/3526211/screenshots/14861201/media/5b688aa536bf9a955187c7eaf1f62b78.jpg";
+		const lettucePic = "https://cdn1.vectorstock.com/i/1000x1000/24/05/cartoon-lettuce-character-vector-392405.jpg";
+		const crabPic = "https://pbs.twimg.com/media/ES5Jvo_UEAA8u2p.jpg";
+		const lobsterPic = "http://clipart-library.com/images/8iAoqE6BT.jpg";
+		const chorizoPic = "https://static.wikia.nocookie.net/ca507bff-d4d7-48d6-a607-1aaff945bb5f/scale-to-width/755";
+		const avocadoPic = "https://cdn.dribbble.com/users/91923/screenshots/15356108/media/96e4b33c699325f533402f87f9bb0d7f.jpg?compress=1&resize=400x300";
+		const chickPic = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAJsAdAMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABAYDBQcCAf/EADgQAAEDAgQEAwYEBQUAAAAAAAEAAgMEEQUSITEGE0FRYXGBIiMyQlKRobHB8BQVctHhJDNDgvH/xAAYAQEBAQEBAAAAAAAAAAAAAAAAAwIEAf/EAB8RAQEAAgIDAAMAAAAAAAAAAAABAgMRIRIxQQQiQv/aAAwDAQACEQMRAD8A7iiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICKNXVkVFTOmmIDW9+q0cHFcNQ54gZHIWfEGSXIWblJ7amNvpZUULDsRgrmExGzhuw7hTVrln0IiICIiAiIgIiICIiAsNXVQ0lO+oqHhkTBdzilZUw0dLLU1LwyGJhe9x6ALjHEXFWIcRvlkgic2iafcxdAPqd3Kzbw9k5YuOOLq7GJXxU4dFRfCxttXeK1HCNXJR4ox0j8sUvungi1idjfz09VipKSeoklgqXOEjWg3B/29dDbtdbL+RN5Ub5HSv5ZzktOh2H78lPlSS/HQsMm/hsTp5r+7zZZCD3B/wAK8gg7KhUpZNS3cbC+a/e62uF4zPTMy1A5sANmO+Zo/UJhnPSu7VfcWlFGoqyGtj5kDrgGxB3BUlWcoiIgIiICIocuIQskkiac8kZAeB8pIB19CEExeXODRcmw7lamXFjmyMc3N0a0ZiozzWTOM0x5UDRcvqDlA9F5yI/HbJ8V4eqMPwy7ppnMDnbNDQ4E3J0Pa3iucVGHRMby5YzTFpA5jnAgeB1uPNWeqx6Wp57aV3MEWgLdM58LrU0rBPIamr5MJuTZxLz3+6hll5d4unHXJP2jHR0cDZGxz3YxwDXljQ50jQdPaFrjz7qbWQOkjdGxpaXE2Z5/sLLNiNJBZ1wWnbQXPkF9o5Zq6tMsjeXCLWDtz52/JLeY9167cuW0pIBDSshJzEDU30KBpjiePl7L2XBrbE2cdr9VinkaYy2+/VSdVvPT3w3jLIKs5geS8hjzfbXQ/vor2uP1dYMNMtS5uaIGz292n9VfOGuIYK2CCJ82fO33M3SQdj2cNlbVl8rj3Yf1FkRfF9V3OIiICgOwiifWzVboiZZg3me0bHKLA28lPRBDqpaXC6KSZzGxxRtuQxu/h5rl/EmJ4pjc5LhyKYH2Ys2tvHxV54xLjFTx29gkuPmP/SqQ+O7pIy+Rm2jPmB6k9LKG2306tEknl9azCInQPnYQbGxB8VLqKWCrF3wDN3Giny0bIaYZA6zd+5UFs/02cCRYjque2R0y8vNLSNppbwwxtP8ATc/ittTySZNbADoBZQWlx1Lt+6ziYjqb9l7K3bylPkOlzuLLG6a1rqLLK7osPNsDn9NV7yxOmv4rcDgla62Yllg3clQeBcSFPTtp33MDiCbfIfqC2lY3+LgdEQSHEWFtzdQ4sMbhj8wsxr/HQFJentnbqmB4s97mUtUbkj3cn1dlYFy3C6mSKiLyTljcDG4bjy9V02klM1LDK4AF7A4gdLhdWGXMcW/X4VlREW0BERBrcfojXYfIxg940Zm+fZUT3cc8GpIa3lPPkN/32XTCuZYnkp5Z2u0eJHWHkSpbI6fx73w+1M/+nLMwNjlPiq9BK2OZ8EhaLG7Ceo7KbZxaXOBGbYWVy4bwGOhpanEsVp2c58ZtG9ody4wL6+J6+ij4eSuWcwqoX9kuIOXoSVlbaQXIseiiU5L2tDmi51A6N8Fm5rSbfTp5qcqvb3My7d7EeKigRRXfK82AuSTolTUOyk3Hqq5X1j6uqgoYyXCaQB2XT2dyk76a+Lfh+WqAqngCP/jG2nf1XqopRVyZXAcmMguv+S8sZanayMkRRjV22VeXyOqGx0lEC1riGgdXkncn7KmE6Zy67re4PhP80cxkcRZRxu9489bfKPFX1oDWgAAACwAUbDKRtDQU9KwACKMN0GhNtT91KXVjOI4NmdzvYiIvUxERAXO8Spo5q2okluSyR/sdN9LroZXPq6donqJ9S10jiCNrXU9l6W08+STwdRQ1ldLUTNDhTZeW3pmN7H8Fd3sa9pa4AtIsQeoVX4BiP8FVVJJ97NYNtoAB/lWpe65+rO2851zuq4VxKneYaKmbIwOPLl5rQAzoCDqtZX4RiFBaSop7NO5IOVv/AGAsF1ayEDqFi6cVJ+Rn9ctPBmPVsEb+TTU5cLlk0xu3zyg6rSRcG4pg2OTPq308rsjRTuiJs1p+Im/W4AXVsXxunoCYYy2SqtcRg6N/q7KrS1bppJJJpM0rjdxt+A8F5ccceo3ry2ZXyvpqKilk0a42aANOhWy4NpW1eP3ABjpGcx9vrOjR+Z9FjZTV2Kv5WHRZyTbnO0jZ5n+2qu+AYNT4JQingGZ7jnmlO8j+p/sFrHHvlnbs5bNERVcwiIgIiINfj1Q6lwmpmYQHBtgT4myoeI1GajgY17Mu2VpBv9l0DFaBmJUMlLI4tDxo4dCqdHwDUwXjixQcs7kx6/qpbcLlOltWcx9rLwrTmDBoSQQZiZSD0B2/Cy3CxwRCGCOJuoY0NF/ALIqYzicJW83kWr4jqn0uGSGKTlyPcGNcNxc629LraKj8eYiKTFKFkpeIuWXXtpe+v6fdZ2WzG8Na5zlIgVsIpomvPxSG5B1v1JKsHDGCUbqFlXUN575vaa1+rWDoAFU2THH66KloXgcx2Quv8I+Yj0XTaWnjpaeKnhbljiYGNHYBS04891bdlxPGMjWNY0NaAANgBay9Ii6HMIiICIiAiIgIiICIiAouIYfSYlTmCup2Txn5Xjby7KUiDT4Pw1hOCzSS4dSCKR4sXF5cQOwuTZbhEQEREBERAREQEXxuwX1AREQEREBERAREQEREBERAREQf/9k=";
+		const tomatoPic = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXhXTp_TMrn23cn9HIW3ABNfK49vdg8Gs5GA:pm1.narvii.com/7636/55f2993b0cebb46f39648751643a7b1d484a2ed7r1-502-593v2_uhq.jpg&usqp=CAU";
+		const pepperPic = "https://img1.cgtrader.com/items/2691042/21682e7e4c/large/chili-pepper-cartoon-3d-model-max-obj-fbx-ma-blend.jpg";
+		const potatoPic = "https://p.turbosquid.com/ts-thumb/8D/Lpmp09/t1j6D9P2/1r/jpg/1591265752/600x600/fit_q87/84c422aab6eb39a2c51b489ce6c6db0c43d1c193/1r.jpg";
+		const cowPic = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTe3fu5aDBhKdfyIQh2WOI_gj6AS_aZemjM3w:https://i.ytimg.com/vi/DSXAlElAzxg/maxresdefault.jpg&usqp=CAU";
+		const veggiePics = [cucumberPic,carrotPic,lettucePic,pepperPic,potatoPic,avocadoPic,tomatoPic];
+		const meatPics = [cowPic,chickPic,chorizoPic,fishPic,crabPic];
+		
+		var salt = false;	
+		var egg = true;
+		var lastSammichType = "none";
+	    var lastbreadType = -1;
+		var isBreadToasted = false;
+	    var lastVeggies = [];
+	    var lastMeats = [];
+	    var lastCheeseType = -1;
+	    var lastCondiments = [];
+	    
+		function setAudio() {
+			
+			let cheeseAudio = document.getElementById("cheeseAux");
+			cheeseAudio.src = cheese[lastCheeseType] + ".mp3";
+			cheeseAudio.load();
+			//cheeseAudio.play();
+			let eggAudio = document.getElementById("eggAux");
+			if (egg) {
+				let eggNum = Math.floor(Math.random() * 2) + 1;
+				eggAudio.src = "Egg" + eggNum + ".mp3";
+			} else {
+				eggAudio.src = "no-egg.mp3";
+				document.getElementById("eggImg").src = "data:image/jpeg;base64,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";
+			}
+			eggAudio.load();
+			if (salt) {
+				eggAudio = document.getElementById("saltAux");
+				eggAudio.src = "sal y pimienta.mp3";
+			}
+			eggAudio.load();
+			//eggAudio.play();
+			let breadAudio = document.getElementById("breadAux");
+			breadAudio.src = "bread.mp3";
+			breadAudio.load();
+			if (lastMeats.length > 0) {
+				let meat1Audio = document.getElementById("meat1Aux");
+				if ("pescado salmon atun".includes(meats[lastMeats[0]])) {
+					meat1Audio.src = "fish sus.mp3";
+				} else if ("cangrejo langosta".includes(meats[lastMeats[0]])) {
+					meat1Audio.src = "crab sus.mp3";	
+				} else if (meats[lastMeats[0]] == "pollo") {
+					meat1Audio.src = "pollo.mp3";
+				}
+				meat1Audio.load();
+				//meat1Audio.play();
+				if (lastMeats.length > 1) {
+					let meat2Audio = document.getElementById("meat2Aux");
+					if ("pescado salmon atun".includes(meats[lastMeats[1]])) {
+						meat2Audio.src = "fish sus.mp3";
+					} else if ("cangrejo langosta".includes(meats[lastMeats[1]])) {
+						meat2Audio.src = "crab sus.mp3";	
+					} else if (meats[lastMeats[1]] == "pollo") {
+						meat2Audio.src = "pollo.mp3";
+					}
+					meat2Audio.load();
+					//meat2Audio.play();
+				}
+			}
+			if (lastVeggies.length > 0) {
+			    let veggieAudio = document.getElementById("veggie1Aux");
+				veggieAudio.src = vegetables[lastVeggies[0]] + ".mp3";
+				veggieAudio.load();
+				//veggieAudio.play();
+			    if (lastVeggies.length > 1) {
+					
+			        veggieAudio = document.getElementById("veggie2Aux");
+					veggieAudio.src = vegetables[lastVeggies[1]] + ".mp3";
+					veggieAudio.load();
+					//veggieAudio.play();
+			        
+					if (lastVeggies.length > 2) {
+			            veggieAudio = document.getElementById("veggie3Aux");
+						veggieAudio.src = vegetables[lastVeggies[2]] + ".mp3";
+						veggieAudio.load();
+						//veggieAudio.play();
+			        }
+			    }
+			}
+		}
+		
+		
+		function setPictures() {
+		    document.getElementById("cheeseImg").src = cheesePic;
+			if (isBreadToasted) {
+				document.getElementById("breadImg").src = toastPic;
+			} else {
+				document.getElementById("breadImg").src = breadPic;
+			}
+			if (lastMeats.length > 0) {
+			    document.getElementById("meat1Img").src = meatPics[lastMeats[0]];
+			    if (lastMeats.length > 1) {
+			        document.getElementById("meat2Img").src = meatPics[lastMeats[1]];
+			    }
+			}
+			if (lastVeggies.length > 0) {
+			    document.getElementById("veggie1Img").src = veggiePics[lastVeggies[0]];
+			    if (lastVeggies.length > 1) {
+			        document.getElementById("veggie2Img").src = veggiePics[lastVeggies[1]];
+			        if (lastVeggies.length > 2) {
+			            document.getElementById("veggie3Img").src = veggiePics[lastVeggies[2]];
+			        }
+			    }
+			}
+			if (egg) {
+				document.getElementById("eggImg").src = eggPic;
+			}
+			setAudio();
+		}
+		
+		
+	    function getMeats(howMany) {
+	        let meatIds = [];
+	        for (let i=0;i<howMany;i++) {
+	            meatIds.push(Math.floor(Math.random() * meats.length));
+	        }
+	        return meatIds;
+	    }
+
+	    function getVeggies(howMany) {
+	        let vegIds = [];
+	        for (let i=0;i<howMany;i++) {
+	            vegIds.push(Math.floor(Math.random() * vegetables.length));
+	        }
+	        return vegIds;
+	    }
+	    
+	    
+	    function makeGoodSandwich() {
+	        //NOTE: Math.random() * x returns a value 0 - (x-1); that is, excluding x.
+			let numberOfMeats = 2;//Math.floor(Math.random() * 3);
+			isBreadToasted = (Math.random() < 0.5);
+			let numberOfVeggies = 3//Math.floor(Math.random() * 4);
+			lastMeats = getMeats(numberOfMeats);
+			lastVeggies = getVeggies(numberOfVeggies);
+			egg = (Math.random() < 0.5);
+			salt = (Math.random() < 0.5);
+			lastCheeseType = Math.floor(Math.random() * 3);
+
+	    	document.getElementById("SammichIndicator").innerHTML = "";
+	    	setPictures();
+	    }
+        function makeShitSandwich() {
+	        location.href = "./bad-sammich.html";
+			
+        }
+    </script>
+</div>
+</body>
+</html>

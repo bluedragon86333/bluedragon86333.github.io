@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Global Final Project</title>
+	<style>
+		body {
+			color:#00ff00;
+			background-color:#00ffff;
+			animation: blinkingBackground 2s infinite;
+		}
+		
+		h1 {
+			color:#ff0000;
+		}
+		.Center {
+    		display: flex;
+    		align-items: center;
+    		justify-content: center;
+			border-color:#ff00ff;
+			animation: blinkingBorder 2s infinite;
+		}
+		
+		.Line {
+			height:2px;
+			width:90%;
+			margin-left:5%;
+			color:#ff0000;
+		}
+		@keyframes blinkingBackground{
+			0%	{ background-color: #00ff00;}
+			33%	{ background-color: #ffff00;}
+			66%	{ background-color: #7e7e00;}
+			100%    { background-color: #00ff00;}
+		}
+		@keyframes blinkingBorder{
+			0%	{ border-color: #00ffff;}
+			50%	{ border-color: #ff00ff;}
+			100%    { border-color: #00ffff;}
+		}
+	</style>
+</head>
+<body>
+	<div class="Center">
+		<h1>How Information is Recorded Through History</h1>
+		<div class="Line"></div>
+		<p><a href="GlobalFinalProject.zip">Download</a></p>
+	</div>
+</body>
+</html>

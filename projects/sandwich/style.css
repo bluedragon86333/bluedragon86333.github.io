@@ -1,0 +1,38 @@
+#badSammichButton {
+    background-color:#ff0000;
+}
+#goodSammichButton {
+    background-color:#00ff00;    
+}
+
+body {
+    background-color:#666b30;
+}
+
+p {
+    color:#00ffff;
+}
+
+h1,h2,h3,h4 {
+    color:#00ffff;
+    text-decoration:bold;
+}
+
+a {
+    text-decoration:none;
+    color:#0000ff;
+}
+
+.FoodImg {
+    max-height:100px;    
+}
+
+.CenteredBody {
+    margin-left:5%;
+    margin-top:20px;
+}
+
+#logo {
+    max-width:500px;    
+}
+
