@@ -1,7 +1,7 @@
 .Center {
   text-align: center;
   border: 3px solid #286835;
-  color: #72c56c;
+  background-color: #72c56c;
 }
 .DisplayImg img {
 	max-width:40%;
