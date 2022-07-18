@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Better News Articles</title>
+<style>
+	aside {
+		float:right;
+		border:3px solid black;
+		padding:10px;
+		margin-right:20%;
+		
+	}
+	.CenteredText {
+		text-align:center;
+	}
+
+</style>
+</head>
+<body>
+	<script>
+		function stringReplace(og,str,regex) {
+			let temp = og;
+			while(temp.includes(str)) {
+				temp = temp.replace(str,regex);
+			}
+			
+			return temp;
+		}
+		function convertText(form) {
+			let converted = form.inputbox.value;
+			
+			converted = stringReplace(converted,"witnesses","these dudes I know");
+			converted = stringReplace(converted,"allegedly","kinda probably");
+			converted = stringReplace(converted,"new study","Tumblr post");
+			converted = stringReplace(converted,"rebuild","avenge");
+			converted = stringReplace(converted,"space","spaaace");
+			converted = stringReplace(converted,"Google Glass","Virtual Boy");
+			converted = stringReplace(converted,"smartphone","Pokédex");
+			converted = stringReplace(converted,"electric","atomic");
+			converted = stringReplace(converted,"senator","elf-lord");
+			converted = stringReplace(converted,"Senator","Elf-lord");
+			converted = stringReplace(converted,"car","cat");
+			converted = stringReplace(converted,"election","eating contest");
+			converted = stringReplace(converted,"debate","dance-off");
+			converted = stringReplace(converted,"self driving","uncontrollably swerving");
+			converted = stringReplace(converted,"self-driving","uncontrollably swerving");
+			converted = stringReplace(converted,"poll","psychic reading");
+			converted = stringReplace(converted,"candidate","airbender");
+			converted = stringReplace(converted,"drone","d0g");
+			converted = stringReplace(converted,"dog","drone");
+			converted = stringReplace(converted,"d0g","dog");
+			converted = stringReplace(converted,"vows to","probably won't");
+			converted = stringReplace(converted,"at large","very large");
+			converted = stringReplace(converted,"successfully","suddenly");
+			converted = stringReplace(converted,"expand","physically expand");
+			converted = stringReplace(converted,"front runner","bladerunner");
+			converted = stringReplace(converted,"frontrunner","bladerunner");
+			converted = stringReplace(converted,"minutes","y3ars");
+			converted = stringReplace(converted,"years","minutes");
+			converted = stringReplace(converted,"y3ars","years");
+			converted = stringReplace(converted,"global","spherical");
+			converted = stringReplace(converted,"horsepower","tons of horsepower");
+			converted = stringReplace(converted,"no indication","lots of signs");
+			converted = stringReplace(converted,"ancient","haunted");
+			converted = stringReplace(converted,"tension","sexual tension");
+			converted = stringReplace(converted,"email","poem");
+			converted = stringReplace(converted,"Facebook CEO","this guy");
+			
+			
+			converted = stringReplace(converted,"launch","fling");
+			
+			document.getElementById("newText").innerHTML = converted;
+		}
+	
+	
+	</script>
+	
+	<h1>Make News Articles Funnier</h1>
+	<p>Inspired by <a href="https://xkcd.com/1288/">this XKCD comic</a>, <a href="https://xkcd.com/1625/">its sequel</a>, and <a href="https://xkcd.com/1679/">another sequel</a>.</p>
+	<form>
+	<INPUT TYPE="text" NAME="inputbox" VALUE="">
+	<input type="button" onclick="convertText(this.form)" value="Convert!">
+	</form>
+	<p id="newText"></p>
+	
+	<aside>
+		<h2 class="CenteredText">Examples</h2>
+		<p><a href="https://www.tmj4.com/news/political/elections-local/meet-the-senate-candidates-who-were-not-on-stage-at-sundays-debate">Meet the Senate airbenders who were not on stage at Sunday's dance-off</a></p>
+		<p><a href="https://www.fox13news.com/news/report-500-crashes-linked-to-self-driving-cars-auto-assist-vehicle-technology">Report: 500 crashes linked to uncontrollably swerving cats, auto-assist vehicle technology</a></p>
+		<p><a href="https://www.thenewstribune.com/news/article263521438.html">Watch Zipline fling a delivery dog</a></p>
+		<p><a href=""></a></p>
+		<p><a href=""></a></p>
+		<p><a href=""></a></p>
+		
+		
+	</aside>
+
+</body>
+</html>
