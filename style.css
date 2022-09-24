@@ -1,0 +1,138 @@
+body {
+	background-color:#200025;
+	font-family: Helvetica, sans-serif;
+}
+h3,h2,h1,p,li {
+	color:#98FB98;
+}
+
+.container{
+	margin:auto;
+	overflow:hidden;
+}
+
+nav {
+	color:#301030;
+
+	margin-right:40px;
+	float:right;
+	
+}
+
+/*header*/
+header {
+	color:#0000ff;
+}
+
+
+header li {
+	display:inline;
+	margin-left:20px;
+	margin-right:20px;
+}
+
+header a {color:#00bbff; text-decoration:none; text-transform:uppercase;font-weight:bold;}
+header a:hover {color:#aad0ff;}
+
+header .current a{
+	color:#008cbf;
+}
+
+/*New photo showcase*/
+aside#sidebar{
+	float:right;
+	width:30%;
+}
+
+aside#sidebar ul {
+	list-style:none;
+	margin-left:-100px;
+}
+
+aside#sidebar h3 {
+	margin-left:-60px;
+}
+
+.photo-showcase {
+	margin-left:30%;
+	margin-right:30%;
+}
+
+article img {
+	margin-left:10px;
+	margin-top:10px;
+	max-height:600px;
+	float:left;
+}
+
+
+
+/*photo showcase- old code
+.photo-showcase {
+    margin-left:30%;
+	margin-right:30%;
+	margin-top:3%;
+    width:40%;
+}
+
+.photo-showcase h2 {
+	color:#98FB98;
+	margin-left:20%;
+
+}
+
+.photo-showcase h3 {
+	margin-left:68%;
+    margin-right:20px;
+}
+.photo-showcase ul {
+	list-style:none;
+	float:right;
+	margin-right:40px;
+}
+
+.photo-showcase li {
+	text-align:left;
+    margin-right:20px;
+	color:#98FB98;
+}
+
+.photo-showcase img {
+	max-height:600px;
+	float:left;
+}
+.photo-info {
+	text-align:left;
+	float:right;
+}
+*/
+
+
+li#fanfic-box {
+	border: #98fb98 solid 1px;
+	background: #200025;
+	padding:20px;	
+}
+
+li#fanfic-box a {
+	color:#00bbff; 
+	text-decoration:none;
+}
+article#fanfic-list ul {
+	list-style:none;
+}
+
+article#fanfic-list h1,h2,p {
+	margin-left:40px;
+}
+
+article#fanfic-list h1 {
+	font-size:28px;
+}
+
+article#fanfic-list {
+	width:40%;
+	float:right;
+	margin-left:20%;
+	margin-top:3%;
+}
