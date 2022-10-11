@@ -24,6 +24,9 @@ header {
 	color:#0000ff;
 }
 
+.center {
+	text-align: center;
+}
 
 header li {
 	display:inline;
