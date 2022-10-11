@@ -70,67 +70,13 @@ article img {
 
 
 
-/*photo showcase- old code
-.photo-showcase {
-    margin-left:30%;
-	margin-right:30%;
-	margin-top:3%;
-    width:40%;
-}
 
-.photo-showcase h2 {
-	color:#98FB98;
-	margin-left:20%;
 
-}
-
-.photo-showcase h3 {
-	margin-left:68%;
-    margin-right:20px;
-}
-.photo-showcase ul {
+#fanfic-box {
 	list-style:none;
-	float:right;
-	margin-right:40px;
-}
-
-.photo-showcase li {
-	text-align:left;
-    margin-right:20px;
-	color:#98FB98;
-}
-
-.photo-showcase img {
-	max-height:600px;
-	float:left;
-}
-.photo-info {
-	text-align:left;
-	float:right;
-}
-*/
-
-
-li#fanfic-box {
 	border: #98fb98 solid 1px;
 	background: #200025;
 	padding:20px;	
-}
-
-li#fanfic-box a {
-	color:#00bbff; 
-	text-decoration:none;
-}
-article#fanfic-list ul {
-	list-style:none;
-}
-
-article#fanfic-list h1,h2,p {
-	margin-left:40px;
-}
-
-article#fanfic-list h1 {
-	font-size:28px;
 }
 
 article#fanfic-list {
@@ -138,4 +84,12 @@ article#fanfic-list {
 	float:right;
 	margin-left:20%;
 	margin-top:3%;
+}
+
+.Box {
+	list-style:none;
+	border: 2px solid #98fb98;
+	width:50%;
+	margin-left:25%;
+	font-weight:bold;	
 }
