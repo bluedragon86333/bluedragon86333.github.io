@@ -23,14 +23,10 @@ const provSubstances = ["ketchup","baking soda","olive oil","semen","grass","soi
 	const channels = ["991375239151894649","841296555188289556"];
 	let channel = client.channels.cache.get('id');// //set channel
 	let toSend = "placeholder text";
-	const fs = require('fs')
 	
 	function sendMessage(content) {
-    
-    }
-	
-	
-	
+		document.getElementById("quote").innerHTML = content;
+	}
 	
 	
 	
