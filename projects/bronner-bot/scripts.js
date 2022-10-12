@@ -31,7 +31,7 @@ const provSubstances = ["ketchup","baking soda","olive oil","semen","grass","soi
 	
 	
 	
-	function printGex(recipient,rating) {
+	function printGex(rating) {
 		let sendThis = "";
 		let currentStructure = Math.floor(Math.random()*gexBeginnings.length);
 		let currentStart = gexBeginnings[currentStructure];
