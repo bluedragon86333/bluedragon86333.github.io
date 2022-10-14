@@ -18,10 +18,7 @@ const provEvents = ["apocalypse","hangover","STD"];
 const provNouns = ["cow","pig","living room","handsome elderly bachelor","sock","face mask","log","tree","metal band mascot","seventh son of a seventh son","Homecoming Queen","marriage proposal"];
 const provSubstances = ["ketchup","baking soda","olive oil","semen","grass","soil","string","yarn","paint","paper","cardboard","chunks","lubricant","gunpowder"];
 
-	
-	//const channel = client.channels.cache.get('id');
-	const channels = ["991375239151894649","841296555188289556"];
-	let channel = client.channels.cache.get('id');// //set channel
+
 	let toSend = "placeholder text";
 	
 	function sendMessage(content) {
@@ -32,6 +29,7 @@ const provSubstances = ["ketchup","baking soda","olive oil","semen","grass","soi
 	
 	
 	function printGex(rating) {
+		document.getElementById("PrintGexButton").innerHTML = "Generate!";
 		let sendThis = "";
 		let currentStructure = Math.floor(Math.random()*gexBeginnings.length);
 		let currentStart = gexBeginnings[currentStructure];
