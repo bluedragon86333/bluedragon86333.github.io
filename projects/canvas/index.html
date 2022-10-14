@@ -1,19 +1,69 @@
-<head>
-	<title></title>
-	<style>
-		body {
-			background-color:#ffaaaa;
-			color:#aaaaff;
-		}
-	</style>
-</head>
+<!DOCTYPE html>
+<html>
+<style>
+#myContainer {
+  width: 256px;
+  height: 224px;
+  position: relative;
+  background: yellow;
+}
+#Enemy {
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  background-color: red;
+}
+</style>
 <body>
-	<canvas width="400" height="400"></canvas>
-	<script>
-		var c = document.getElementById("myCanvas");
-		var ctx = c.getContext("2d");
-		ctx.moveTo(0, 0);
-		ctx.lineTo(200, 100);
-		ctx.stroke();
-	</script>
+
+<p>
+<button onclick="mainLoop()">Click Me</button> 
+</p>
+
+<div id ="myContainer">
+<div id ="player"></div>
+<div id ="Enemy"></div>
+</div>
+
+<script>
+var id = null;
+function mainLoop() {
+    var playerX = 0;
+    var playerY = 0;
+    var playerXV = 1;
+    var playerYV = 1;
+    myMove(document.getElementById("Enemy"));
+    
+}
+
+function playerProcess() {
+    if (playerX == 224) {
+      playerXV = -1;
+    }
+    if (playerX == 0) {
+      playerXV = 1;
+    }
+    if (playerY > 192) {
+      playerYV = -1;
+    }
+    if (playerY == 0) {
+      playerYV = 1;
+    }
+    
+    playerX += playerXV;
+    playerY += playerYV;
+}
+function myMove(elem) {
+
+  clearInterval(id);
+  id = setInterval(frame, 10);
+  function frame() {
+    playerProcess();
+    elem.style.top = playerY + 'px'; 
+    elem.style.left = playerX + 'px'; 
+  }
+}
+</script>
+
 </body>
+</html>
