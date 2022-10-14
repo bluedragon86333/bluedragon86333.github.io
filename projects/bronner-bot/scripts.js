@@ -8,9 +8,6 @@ const gexBeginnings = ["I haven't felt this ","I haven't felt this ","This remin
 const banned = ['sex','torture','have sex with','hungover','pregnant','STD','semen'];
 const comedians = ["Trevor Noah","Jerry Seinfeld","John Oliver","Chris Rock","Jordan Peele","Keegan Michael Key","Amy Poehler","Tina Fe","Kate McKinnon","Colin Jost","Michael Che","Eddy Murphy","Steve Martin","Melissa McCarthy","Conan O'Brien","Jimmy Fallon","John Stewart","Jimmy Kimmel","James Corden","Pete Davidson"];
 
-const includePairs = [["choo","bless you"],["jesus","What about him?"],["cool","Cool?! Don\'t you mean FIERY HOT PEPPER SAUCE????:fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: :fire: "],["hk","I like Hollow Knight, but I think Full Knight is better"],["hollow knight","Full Knight better"],["good bot","aww thanks! *sharpens sex knives*"],["bad bot","who asked you?"],["lol","Ain't it fun?"],["burn","oh-oh-oh-oh, my love is on fire (whoo)"],["frog","TOAD"]];
-const dmPairs = [["","I'm so sorry. So, so, so, so, so, so, sorry."],["lol","do you think this is fucking funny?"],["lmao","I wish you hadn't done that."],["cool","https://i.pinimg.com/originals/22/0c/88/220c88254e6f1371d68ee70d6a265bad.jpg"],["why","WHY FUCKING NOT HAHAHAHAHAHA"],["ok","WHAT WILL IT TAKE TO SHOW YOU THAT IT'S NOT THE LIFE IT SEEMS?"],["your mom","YOUR MOM"],["omg","See what you've done?"]];
-
 const provBeginnings = ["If you ","If you ","When in doubt, use ","When in doubt, consult a ","Feeling ","When in doubt, consult a "];
 const provPassives = ["burned","highly bred","bitten","scorned","eaten","buried","married","killed","succeeded","preceded","elected","demoted","promoted","synthesized","ogged"];
 const provVerbs = ["burn","cut","have sex with","fumigate","watch","drive","walk on","stare at","flambe","refrigerate","wear","stab","beat up","laugh at","sing about","dance around","accept","flash"];
@@ -22,7 +19,7 @@ const provSubstances = ["ketchup","baking soda","olive oil","semen","grass","soi
 	let toSend = "placeholder text";
 	
 	function sendMessage(content) {
-		document.getElementById("quote").innerHTML = "{\"" + content+ "\"}";
+		document.getElementById("quote").innerHTML = "<<" + content+ ">>";
 		document.getElementById("PrintGexButton").innerHTML = "Generate!";
 	}
 	
