@@ -22,7 +22,7 @@ const provSubstances = ["ketchup","baking soda","olive oil","semen","grass","soi
 	let toSend = "placeholder text";
 	
 	function sendMessage(content) {
-		document.getElementById("quote").innerHTML = content;
+		document.getElementById("quote").innerHTML = "{\"" + content+ "\"}";
 		document.getElementById("PrintGexButton").innerHTML = "Generate!";
 	}
 	
