@@ -23,13 +23,14 @@ const provSubstances = ["ketchup","baking soda","olive oil","semen","grass","soi
 	
 	function sendMessage(content) {
 		document.getElementById("quote").innerHTML = content;
+		document.getElementById("PrintGexButton").innerHTML = "Generate!";
 	}
 	
 	
 	
 	
 	function printGex(rating) {
-		document.getElementById("PrintGexButton").innerHTML = "Generate!";
+		
 		let sendThis = "";
 		let currentStructure = Math.floor(Math.random()*gexBeginnings.length);
 		let currentStart = gexBeginnings[currentStructure];
