@@ -93,3 +93,10 @@ article#fanfic-list {
 	margin-left:25%;
 	font-weight:bold;	
 }
+
+.WideBox {
+	list-style:none;
+	border: 2px solid #98fb98;
+	width:80%;
+	margin-left:10%;
+}
