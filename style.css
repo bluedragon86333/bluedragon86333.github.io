@@ -101,11 +101,17 @@ article#fanfic-list {
 	margin-left:10%;
 }
 
-.WideBox h {
+.WideBox h2 {
 	padding:10px;
 }
 
 .WideBox ul {
 	margin-left:10px;
 	line-height:1.6;
+}
+
+.PeriodicTrendsTable {
+	color:#98FB98;
+	border: 2px solid #98fb98;
+	
 }
