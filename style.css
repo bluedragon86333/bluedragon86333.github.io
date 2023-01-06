@@ -34,8 +34,8 @@ header li {
 	margin-right:20px;
 }
 
-header a {color:#00bbff; text-decoration:none; text-transform:uppercase;font-weight:bold;}
-header a:hover {color:#aad0ff;}
+a {color:#00bbff; text-decoration:none; text-transform:uppercase;font-weight:bold;}
+a:hover {color:#aad0ff;}
 
 header .current a{
 	color:#008cbf;
