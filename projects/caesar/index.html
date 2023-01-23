@@ -15,9 +15,11 @@
 			let encrypted = original.inputbox.value;
 			let decrypted = "";
 			for (let offset = 0; offset < 25; offset++) {
+				decrypted += offset + ": ";
 				for (let i = 0; i < encrypted.length;i++) {
 					decrypted += alphabet[alphabet.indexOf(encrypted[i]) + offset];	
 				}
+				decrypted += " ";
 			}
 			document.getElementById("output").innerHTML = decrypted;
 		}
