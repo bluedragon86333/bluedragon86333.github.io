@@ -2,13 +2,15 @@ document.getElementById("output").innerHTML = "booted JavaScript successfully";
 
 function addItems(content,contentList) { //prints results
 	document.getElementById("output").innerHTML = content;
-	
+	document.getElementById("output2").innerHTML = contentList;
+	/*
 	for (let i=0;i<contentList.length,i++) {
 		const row = document.createElement("tr");
 		const node = document.createTextNode(content);
 		row.appendChild(node);
 		const element = document.getElementById("div1");
 	}
+	*/
 }
 
 
