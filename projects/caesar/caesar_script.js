@@ -2,7 +2,7 @@ document.getElementById("output").innerHTML = "booted JavaScript successfully";
 
 function addItems(content,contentList) { //prints results
 	document.getElementById("output").innerHTML = content;
-	document.getElementById("output2").innerHTML = contentList;
+	//document.getElementById("output2").innerHTML = contentList;
 	/*
 	for (let i=0;i<contentList.length,i++) {
 		const row = document.createElement("tr");
@@ -21,10 +21,10 @@ function generatePossibilities(original) {
 	let decryptedList = [];
 	for (let offset = 0; offset < 26; offset++) {
 		decrypted += offset + ": ";
-		decryptedList.append("");
+		//decryptedList.append("");
 		for (let i = 0; i < encrypted.length;i++) {
 			decrypted += alphabet[alphabet.indexOf(encrypted[i]) + offset];
-			decryptedList[decryptedList.length - 1] += alphabet[alphabet.indexOf(encrypted[i]) + offset];
+			//decryptedList[decryptedList.length - 1] += alphabet[alphabet.indexOf(encrypted[i]) + offset];
 		}
 		decrypted += " ";
 	}
