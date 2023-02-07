@@ -1,4 +1,4 @@
-function printProverb(rating) {
+function printProverb() {
 		let sendThis = "";
 		let currentStructure = Math.floor(Math.random() * provBeginnings.length);
 		let currentStart = provBeginnings[currentStructure];
@@ -9,7 +9,7 @@ function printProverb(rating) {
 		let currentAmt = "more";
 		let isLiving = "";
 		let currentSubstance = provSubstances[Math.floor(Math.random() * provSubstances.length)];
-		
+		let rating = "r";
 		
 		if (Math.random() > 0.5) {
 			currentAmt = "less";
