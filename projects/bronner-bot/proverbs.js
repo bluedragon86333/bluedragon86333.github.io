@@ -70,5 +70,5 @@ function printProverb(rating) {
 			}
 			sendThis = currentStart.concat(isLiving + " " + currentNoun + " who is better " + currentPassive + ".");
 		}
-		return sendThis;
+		document.getElementById("output").innerHTML = sendThis;
 	}
