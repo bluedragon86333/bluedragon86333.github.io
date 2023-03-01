@@ -1,0 +1,27 @@
+		#CyanPurple {
+			animation: blinkingBackground2 2s infinite;
+		}
+		
+		#blurry {
+			filter: blur(5px);
+		}
+		#negative {
+			filter: invert(1);
+		}
+		
+		#sat {
+			filter: saturate(2000%);
+		}
+		#rot90 {
+			transform: rotate(90deg) scaleX(-1);
+		}
+		#rot_90 {
+			transform: rotate(-90deg) scaleX(-1);
+		}
+
+		@keyframes blinkingBackground2{
+			0%		{ background-color: #00ffff;}
+			50%	    { background-color: #ff00ff;}
+			100%    { background-color: #00ffff;}
+		}
+
