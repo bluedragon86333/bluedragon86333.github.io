@@ -20,6 +20,27 @@
 		
 		<h1>Empty Divs</h1>
 		
+		<h2>Normal</h2>
+		<div class="TestDivs"></div>
+		<code>
+			width:400px;
+			height:400px;
+			border: black solid 2px;
+			margin: auto;
+		</code>
+		
+		<h2>Cyan to Purple</h2>
 		<div id="CyanPurple" class="TestDivs"></div>
+		<code>
+			animation: CyanPurpleBackground 2s infinite;
+		</code>
+		Animation definition:
+		<code>
+			@keyframes CyanPurpleBackground{
+				0%	{ background-color: #00ffff;}
+				50%	{ background-color: #ff00ff;}
+				100%    { background-color: #00ffff;}
+			}
+		</code>
 	</div>
 </body>
