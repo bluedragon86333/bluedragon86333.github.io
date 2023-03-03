@@ -5,6 +5,7 @@ img {
 	width:400px;
 	height:400px;
 	border: black solid 2px;
+	margin: auto;
 }
 code {
 	background-color: #f1f1f1;
