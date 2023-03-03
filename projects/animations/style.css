@@ -1,8 +1,13 @@
 img {
 	max-width:400px;	
 }
+.TestDivs {
+	width:400px;
+	height:400px;
+	border: black solid 2px;
+}
 		#CyanPurple {
-			animation: blinkingBackground2 2s infinite;
+			animation: CyanPurpleBackground 2s infinite;
 		}
 		
 		#blurry {
