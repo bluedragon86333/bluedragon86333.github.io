@@ -12,20 +12,27 @@ code {
 	color: #000000;
 	text-align: left;
 }
-		#CyanPurple {
-			animation: CyanPurpleBackground 2s infinite;
-		}
+
+#green {
+	color: #00ff00;	
+}
+
+#CyanPurple {
+	animation: CyanPurpleBackground 2s infinite;
+}
+
 		
-		#blurry {
-			filter: blur(5px);
-		}
-		#negative {
-			filter: invert(1);
-		}
+#blurry {
+	filter: blur(5px);
+}
+
+#negative {
+	filter: invert(1);
+}
 		
-		#sat {
-			filter: saturate(2000%);
-		}
+#sat {
+	filter: saturate(2000%);
+}
 		#rot90 {
 			transform: rotate(90deg) scaleX(-1);
 		}
