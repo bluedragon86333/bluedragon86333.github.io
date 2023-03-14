@@ -1,4 +1,5 @@
-let objarray = {{
+let objarray = {
+{
 	"name":"goose",
 	"plural":"geese",
 	"parentNouns":["living thing","animal","bird","waterfowl"],
@@ -6,8 +7,7 @@ let objarray = {{
 	"behaviorAdjectives":["aggressive","loud","obnoxious"],
 	"has":["feathers","wings","feet"],
 	"other":{"":"","":""},
-},
-{
+},{
 	"name":"moose",
 	"plural":"moose",
 	"parentNouns":["living thing","animal","mammal","deer"],
