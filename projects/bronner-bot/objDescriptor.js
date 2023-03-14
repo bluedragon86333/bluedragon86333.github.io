@@ -3,7 +3,8 @@ const objarray = JSON.parse(jsontext);
 
 function sayAdj(plural) {
 	let index = 0;
-	return objarray[index].name + " is " + objarray[index].physAdjectives[0];
+	//return objarray[index].name + " is " + objarray[index].physAdjectives[0];
+	return "json was parsed successfully";
 }
 
 function returnToHTML() {
