@@ -1,5 +1,5 @@
 let jsontext = '{{"name":"goose","plural":"geese","parentNouns":["living thing","animal","bird","waterfowl"],"physAdjectives":["large","brown","white"],"behaviorAdjectives":["aggressive","loud","obnoxious"],"has":["feathers","wings","feet"],"other":{"":"","":""}}}';
-//const objarray = JSON.parse(jsontext);
+const objarray = JSON.parse(jsontext);
 
 function sayAdj(plural) {
 	let index = 0;
