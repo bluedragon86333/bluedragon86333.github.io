@@ -1,9 +1,9 @@
-let jsontext = '{{"nouns":["name":"goose","plural":"geese","parentNouns":["living thing","animal","bird","waterfowl"],"physAdjectives":["large","brown","white"],"behaviorAdjectives":["aggressive","loud","obnoxious"],"has":["feathers","wings","feet"],"other":{"":"","":""}]}}';
+let jsontext = '{{"nouns":[{"name":"goose","plural":"geese","parentNouns":["living thing","animal","bird","waterfowl"],"physAdjectives":["large","brown","white"],"behaviorAdjectives":["aggressive","loud","obnoxious"],"has":["feathers","wings","feet"],"other":{"":"","":""}}]}}';
 const objarray = JSON.parse(jsontext);
 
 function sayAdj(plural) {
 	let index = 0;
-	return objarray.nouns.name;
+	return data
 	//+ " is " + objarray[index].physAdjectives[0];
 	return "json was parsed successfully";
 }
