@@ -44,6 +44,9 @@ var x = setInterval(function() {
 		hours -= 12;
 	}
 	var minutes = now.getMinutes();
+	if (minutes < 10) {
+		minutes = "0" + now.getMinutes();
+	}
 	
 	var currentDay = days[now.getDay()];
 	console.log(currentDay);
