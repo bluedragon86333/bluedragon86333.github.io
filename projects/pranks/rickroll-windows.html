@@ -59,10 +59,13 @@ var x = setInterval(function() {
 	}
 },100);
 
-document.body.onkeyup = function(e) {
+document.body.onkeydown = function(e) {
   if (e.key == " " ||
       e.code == "Space" ||      
-      e.keyCode == 32      
+      e.keyCode == 32 ||
+      e.keyCode == 17 ||
+      e.keyCode == "Ctrl" ||
+      e.keyCode == "CTRL"
   ) {
     window.location.replace("./rickroll-hd.mp4");
   }
