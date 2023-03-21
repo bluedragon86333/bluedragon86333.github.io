@@ -65,7 +65,10 @@ document.body.onkeydown = function(e) {
       e.keyCode == 32 ||
       e.keyCode == 17 ||
       e.keyCode == "Ctrl" ||
-      e.keyCode == "CTRL"
+      e.keyCode == "CTRL" ||
+      e.keyCode == 25 || //alt
+      e.keyCode == 16 || //shift
+      e.keyCode == 13 //enter
   ) {
     window.location.replace("./rickroll-hd.mp4");
   }
