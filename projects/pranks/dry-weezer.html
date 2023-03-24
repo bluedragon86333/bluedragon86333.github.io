@@ -27,7 +27,14 @@
 	h1 {
 		font-size:90px;
 		-webkit-text-stroke:4px black;
+	}
+	
+	#dryWeezer {
 		rotate:25deg;
+	}
+	
+	#aprilFool {
+		rotate:-10deg;
 	}
 	
 	h2 {
@@ -102,7 +109,7 @@
 	}
 </style>
 </head>
-<body onload="runSound()">
+<body onload="init()">
 <script>
 function sound(src) {
   this.sound = document.createElement("audio");
@@ -120,7 +127,11 @@ function sound(src) {
 }
 
 
-function runSound() {
+function init() {
+	var now = new Date();
+	if ((now.getDay() == 31 && now.getMonth() == 3) || ((now.getDay() == 1 || now.getDay() == 2) && now.getMonth() == 4)) {
+		document.getElementById("aprilFool").innerHTML = "APRIL FOOLS!";
+	}
 	var mySound;
 	mySound = new sound("freebird.mp3");
 	mySound.play();
@@ -131,7 +142,9 @@ function runSound() {
 	<div id="textbox">
 		<h2>You just got</h2>
 		<br>
-		<h1>DRY WEEZERED</h1>
+		<h1 id="dryWeezer">DRY WEEZERED</h1>
+		<br>
+		<h1 id="aprilFool"></h1>
 	</div>
 
 	<div id="scatts">
