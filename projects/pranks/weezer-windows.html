@@ -1,0 +1,102 @@
+<DOCTYPE!html>
+<head>
+<title>;)</title>
+<style>
+	@font-face {
+		font-family: 'SegoeUI'; /*a name to be used later*/
+		src: url('./Segoe-UI.TTF'); /*URL to font*/
+	}
+	
+	body {
+		background-image: url("windows-lake.jpg");
+		background-size:contain;
+		background-repeat:no-repeat;
+	}
+	
+	h1,h2,h3,p {
+		font-weight:lighter;
+		font-family:SegoeUI;
+		color:#ffffff;
+		user-select: none;
+	}
+	/*
+	#wholeScrn {
+		width:100%;
+		height:100%;
+	}
+	*/
+
+	#time {
+		font-size:900%;
+		margin-bottom:-11%;
+	}
+	
+	#date {
+		font-size:400%;
+	}
+	
+	#dateTime {
+		width:40%;
+		margin-top:38.5%;
+		margin-left:8%;
+	}
+</style>
+</head>
+<body onclick="changeURL()">
+<script>
+  
+function changeURL() {
+	window.location.replace("./dry-weezer.html");
+}
+document.addEventListener('contextmenu', event => event.preventDefault());
+  document.addEventListener('mousedown', event => changeURL());
+var x = setInterval(function() {
+	const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+	const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+	
+	var now = new Date();
+	
+	var hours = now.getHours();
+	if (hours > 12) {
+		hours -= 12;
+	}
+	var minutes = now.getMinutes();
+	if (minutes < 10) {
+		minutes = "0" + now.getMinutes();
+	}
+	
+	var currentDay = days[now.getDay()];
+	console.log(currentDay);
+	
+	document.getElementById("time").innerHTML = hours + ":" + minutes;
+	document.getElementById("date").innerHTML = currentDay + ", " + months[now.getMonth()] + " " + now.getDate();
+	if (1 == 0) {
+		clearInterval(x);
+	}
+},100);
+
+document.body.onkeydown = function(e) {
+  if (e.key == " " ||
+      e.code == "Space" ||      
+      e.keyCode == 32 ||
+      e.keyCode == 17 ||
+      e.keyCode == "Ctrl" ||
+      e.keyCode == "CTRL" ||
+      e.keyCode == 25 || //alt
+      e.keyCode == 16 || //shift
+      e.keyCode == 13 //enter
+  ) {
+    window.location.replace("./dry-weezer.html");
+  }
+}
+
+
+
+</script>
+
+	<div id="dateTime">
+		<h1 id="time">12:20</h1>
+		<p id="date">Friday, March 31</p>
+	</div>
+
+</body>
