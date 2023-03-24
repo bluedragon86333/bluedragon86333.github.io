@@ -119,11 +119,16 @@ function sound(src) {
   }
 }
 
-var mySound;
-mySound = new sound("freebird.mp3");
-mySound.play();
+
+function runSound() {
+	var mySound;
+	mySound = new sound("freebird.mp3");
+	mySound.play();
+}	
 	
-	
+window.onload = function() {
+  runSound();
+};
 	
 </script>
 	<img id="ratpic" src="rat.webp">
