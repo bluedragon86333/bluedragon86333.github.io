@@ -54,8 +54,8 @@
 		rotate:-90deg;
 	}
 	
-	.rotRight {
-		rotate:90deg;
+	.constRot {
+		animation:ConstRotate 1s infinite;
 	}
 	
 	#scatts {
@@ -82,6 +82,14 @@
 		33%	{background-color:#00f;}
 		66%	{background-color:#0f0;}
 		100%	{background-color:#fff;}
+	}
+	
+	@keyframes ConstRotate {
+		0%	{rotate:0deg;}
+		25%	{rotate:90deg;}
+		50%	{rotate:180deg;}
+		75%	{rotate:270deg;}
+		100%	{rotate:360deg;}
 	}
 </style>
 </head>
@@ -118,7 +126,7 @@ mySound.play();
 
 	<div id="scatts">
 		<img id="scatt-pic" class="upsideDown" src="scott-pfp.webp">
-		<img id="scatt-pic" class="rotLeft" src="scott-pfp.webp">
+		<img id="scatt-pic" class="constRot" src="scott-pfp.webp">
 		<img id="scatt-pic" class="rotRight" src="scott-pfp.webp">
 		<img id="scatt-pic" src="scott-pfp.png">
 	</div>
