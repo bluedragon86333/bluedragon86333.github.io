@@ -17,6 +17,29 @@
 </style>
 </head>
 <body>
+<script>
+function sound(src) {
+  this.sound = document.createElement("audio");
+  this.sound.src = src;
+  this.sound.setAttribute("preload", "auto");
+  this.sound.setAttribute("controls", "none");
+  this.sound.style.display = "none";
+  document.body.appendChild(this.sound);
+  this.play = function(){
+    this.sound.play();
+  }
+  this.stop = function(){
+    this.sound.pause();
+  }
+}
+
+
+function init() {
+	var mySound;
+	mySound = new sound("freebird.mp3");
+	mySound.play();
+}	
+</script>
 
 <video autoplay muted loop id="myVideo">
   <source src="./rickroll-hd.mp4" type="video/mp4">
