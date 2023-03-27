@@ -23,6 +23,7 @@ function sound(src) {
   this.sound.src = src;
   this.sound.setAttribute("preload", "auto");
   this.sound.setAttribute("controls", "none");
+  this.sound.setAttribute("loop", true);
   this.sound.style.display = "none";
   document.body.appendChild(this.sound);
   this.play = function(){
@@ -36,7 +37,7 @@ function sound(src) {
 
 function init() {
 	var mySound;
-	mySound = new sound("freebird.mp3");
+	mySound = new sound("rickroll.mp3");
 	mySound.play();
 }	
 </script>
