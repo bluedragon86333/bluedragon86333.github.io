@@ -120,6 +120,8 @@
 </head>
 <body onload="init()">
 <script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+
 function sound(src) {
   this.sound = document.createElement("audio");
   this.sound.src = src;
