@@ -73,6 +73,14 @@
 		animation:ConstRotateRight 1s infinite;
 	}
 	
+	#ultsat {
+		filter: saturate(2000%);
+	}
+	
+	#green {
+		filter: opacity(0.5) drop-shadow(0 0 0 green);
+	}
+	
 	#scatts {
 		position: absolute; 
 		bottom: 0;
@@ -161,7 +169,7 @@ function init() {
 	</div>
 	</div>
 	<div id="scatts">
-		<img id="scatt-pic" class="upsideDown" src="scott-pfp.webp">
+		<img id="scatt-pic green" class="upsideDown" src="scott-pfp.webp">
 		<img id="scatt-pic" class="constRotLeft" src="scott-pfp.webp">
 		<img id="scatt-pic" class="constRotRight" src="scott-pfp.webp">
 		<img id="scatt-pic" class="rotLeft" src="scott-pfp.png">
