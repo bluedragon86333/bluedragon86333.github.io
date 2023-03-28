@@ -8,12 +8,9 @@
 	}
 	
 	body {
-		background-image: url("windows-lake.jpg");
+		background-image: url("windows10-beach.jpg");
+		background-size:contain;
 		background-repeat:no-repeat;
-		background-size: cover;
-		background-position: center;
-		width: 100%;
-		height: 100%;
 	}
 	
 	h1,h2,h3,p {
@@ -47,12 +44,13 @@
 </head>
 <body onclick="changeURL()">
 <script>
-  
-function changeURL() {
-	window.location.replace("./dry-weezer.html");
-}
-document.addEventListener('contextmenu', event => event.preventDefault());
-  document.addEventListener('mousedown', event => changeURL());
+	function changeURL() {
+		window.location.replace("./dry-weezer.html");
+	}
+
+	document.addEventListener('contextmenu', event => event.preventDefault());
+	document.addEventListener('mousedown', event => changeURL());
+	
 var x = setInterval(function() {
 	const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 	const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
