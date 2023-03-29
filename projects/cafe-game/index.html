@@ -1,0 +1,28 @@
+<body>
+<script>
+	var recipes = {
+		"dough":{
+			"ingredients":["flour","water"],
+			"actions":["roll","mix"],
+			"type":"ingredient"
+		}
+	};
+	
+function process() {
+	document.getElementById("output").innerHTML = "You made some stuff"; 
+}
+</script>
+	
+	<h2>Actions</h2>
+	<form action="process()">
+		<input type="checkbox" id="mix_box" value="mix">
+		<label for="mix_box"> Mix</label><br>
+		<input type="checkbox" id="roll_box" value="roll">
+		<label for="roll_box">Roll</label><br>
+		<input type="checkbox" id="bake_box" value="bake">
+		<label for="bake_box">Bake</label><br><br>
+		<input type="submit" value="Submit">
+	</form>
+	<button>Go</button>
+	<p id="output">Result:</p>
+</body>
