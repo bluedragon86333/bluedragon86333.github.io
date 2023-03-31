@@ -2,16 +2,16 @@
 <script>
 	var recipes = {
 		"dough":{
-			"ingredients":["flour","water"],
-			"actions":["combine"],
-			"type":"ingredient"
-			"further-actions":{
-				"boil":"bagel",
-				"bake":"bread",
-				"pan-fried":"fried_dough"
-			}
+		"ingredients":["flour","water"], 
+		"actions":["combine"],
+		"type":"ingredient",
+		"further-actions":{
+			"boil":"bagel",
+			"bake":"bread",
+			"pan-fried":"fried_dough"
 		}
-	};
+	}
+};
 	
 function process() {
 	document.getElementById("compilation_check").innerHTML = "You made some stuff"; 
