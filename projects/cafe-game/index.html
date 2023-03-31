@@ -16,12 +16,18 @@
 function process() {
 	document.getElementById("compilation_check").innerHTML = "You made some stuff"; 
 	let selectedIngredients = [];
-	let rawInputs = ocument.getElementsByTagName("input");
-	for (let i = 0; i < rawInputs; i++) {
+	let rawInputs = document.getElementsByTagName("input");
+	for (let i = 0; i < rawInputs.length; i++) {
 		if (rawInputs[i].type == "checkbox") {
-			selectedIngredients.push(rawInputs[i].value);
+			if (rawInputs[i].checked) {
+				console.log("raw input value: " + rawInputs[i].value);
+				selectedIngredients.push(rawInputs[i].value);
+			}
+			
 		}
 	}
+	console.log(selectedIngredients);
+	let basicList = ["item","item2","item3"];
 	document.getElementById("output").innerHTML = "Ingredients picked: " + selectedIngredients;
 }
 </script>
