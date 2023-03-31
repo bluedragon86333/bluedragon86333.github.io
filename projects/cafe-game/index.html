@@ -1,48 +1,150 @@
 <body>
 <script>
-	var recipes = {
-		"dough":{
-		"ingredients":["flour","water"], 
-		"actions":["combine"],
+	/*
+	{
+		"name":"",
+		"ingredients":"", 
+		"actions":"",
 		"type":"ingredient",
 		"further-actions":{
-			"boil":"bagel",
-			"bake":"bread",
-			"pan-fried":"fried_dough"
+			"cutter":""
 		}
 	}
-};
 	
-function process() {
-	document.getElementById("compilation_check").innerHTML = "You made some stuff"; 
-	let selectedIngredients = [];
-	let rawInputs = document.getElementsByTagName("input");
-	for (let i = 0; i < rawInputs.length; i++) {
-		if (rawInputs[i].type == "checkbox") {
-			if (rawInputs[i].checked) {
-				console.log("raw input value: " + rawInputs[i].value);
-				selectedIngredients.push(rawInputs[i].value);
-			}
+	
+	
+	
+	*/
+var recipes = {
+	"recipes":[
+	{
+		"name":"dough",
+		"ingredients":["flour","water"], 
+		"actions":"combine",
+		"type":"ingredient",
+		"further-actions":{
+			"pot":"bagel",
+			"oven":"bread",
+			"pan":"fried_dough"
+		}
+	},
+	{
+		"name":"bread",
+		"ingredients":"dough", 
+		"actions":"oven",
+		"type":"ingredient",
+		"further-actions":{
+			"cutter":"sliced_bread"
+		}
+	},
+	{
+		"name":"fried_dough",
+		"ingredients":"dough", 
+		"actions":"pan",
+		"type":"dish",
+		"further-actions":{
 			
 		}
 	}
-	console.log(selectedIngredients);
-	let basicList = ["item","item2","item3"];
-	document.getElementById("output").innerHTML = "Ingredients picked: " + selectedIngredients;
+]};
+	
+function arrayCompare(_arr1, _arr2) {
+    if (
+      !Array.isArray(_arr1)
+      || !Array.isArray(_arr2)
+      || _arr1.length !== _arr2.length
+      ) {
+        return false;
+      }
+    
+    // .concat() to not mutate arguments
+    const arr1 = _arr1.concat().sort();
+    const arr2 = _arr2.concat().sort();
+    
+    for (let i = 0; i < arr1.length; i++) {
+        if (arr1[i] !== arr2[i]) {
+            return false;
+         }
+    }
+    
+    return true;
 }
+
+function process() {
+	//var declaration
+	let selectedIngredients = [];
+	let rawInputs = document.getElementsByTagName("input");
+	let selectedRadio = "";
+	//let baseFood = "";
+	let finalFood = "";
+	
+	//iterate through inputs on form
+	for (let i = 0; i < rawInputs.length; i++) {
+		if (rawInputs[i].type == "checkbox") { //get ingredients
+			if (rawInputs[i].checked) {
+				
+				selectedIngredients.push(rawInputs[i].value);
+			}
+			
+		} else if (rawInputs[i].type == "radio") { //get action
+			if (rawInputs[i].checked) {
+				selectedRadio = rawInputs[i].value;
+			}
+		}
+	}
+	console.log("selectedIngredients: " + selectedIngredients);
+	console.log("how many recipes: " + recipes.recipes.length);
+	//get finalFood from chosen ingredients
+	
+	for (let i = 0; i < recipes.recipes.length;i++) {
+		//console.log("recipes[" + i + "].ingredients: " + recipes.recipes[i].ingredients);
+		if (arrayCompare(recipes.recipes[i].ingredients,selectedIngredients)) { //are ingredients the same?
+			if (recipes.recipes[i].actions == selectedRadio) { //is action correct?
+				finalFood = recipes.recipes[i].name;
+				break;
+			}
+		}
+	}
+	if (finalFood == "") {
+		finalFood = "complete shit";
+	}
+	
+	//prints results to HTML
+	document.getElementById("compilation_check").innerHTML = "Compiled successfully";
+	document.getElementById("chosenIngredients").innerHTML = "Ingredients picked: " + selectedIngredients;
+	document.getElementById("finalFoodResult").innerHTML = "You made: " + finalFood + " in the " + selectedRadio;
+	
+}
+
+
 </script>
 	
-	<h2>Ingredients</h2>
+	
 	<form>
+		<h2>Ingredients</h2>
 		<input type="checkbox" id="flour_box" value="flour">
 		<label for="flour_box">Flour</label><br>
 		<input type="checkbox" id="sugar_box" value="sugar">
 		<label for="sugar_box">Sugar</label><br>
 		<input type="checkbox" id="water_box" value="water">
 		<label for="water_box">Water</label><br>
+		<input type="checkbox" id="dough_box" value="dough">
+		<label for="dough_box">Dough</label><br>
+		<br>
+		<h2>Where to put?</h2>
+		<input type="radio" id="combine_radio" value="combine">
+		<label for="combine_radio">(Combine)</label><br>
+		<input type="radio" id="pot_radio" value="pot">
+		<label for="pot_radio">Pot</label><br>
+		<input type="radio" id="pan_radio" value="pan">
+		<label for="pan_radio">Pan</label><br>
+		<input type="radio" id="oven_radio" value="oven">
+		<label for="oven_radio">Oven</label>
+
 		<input type="button" onclick="process()" value="Submit">
 	</form>
 	
-	<p id="output">Output</p>
+	<p id="chosenIngredients">Output</p>
+	<p id="finalFoodResult">Final Food</p>
 	<p id="compilation_check">Compilation check</p>
 </body>
