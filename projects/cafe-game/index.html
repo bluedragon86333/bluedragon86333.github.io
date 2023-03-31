@@ -39,7 +39,7 @@ var recipes = {
 	},
 	{
 		"name":"fried_dough",
-		"ingredients":"dough", 
+		"ingredients":["dough"], 
 		"actions":"pan",
 		"type":"dish",
 		"further-actions":{
@@ -112,7 +112,7 @@ function process() {
 	//prints results to HTML
 	document.getElementById("compilation_check").innerHTML = "Compiled successfully";
 	document.getElementById("chosenIngredients").innerHTML = "Ingredients picked: " + selectedIngredients;
-	document.getElementById("finalFoodResult").innerHTML = "You made: " + finalFood + " in the " + selectedRadio;
+	document.getElementById("finalFoodResult").innerHTML = "You made: <b>" + finalFood + "</b> in the " + selectedRadio;
 	
 }
 
