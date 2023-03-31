@@ -3,27 +3,40 @@
 	var recipes = {
 		"dough":{
 			"ingredients":["flour","water"],
-			"actions":["roll","mix"],
+			"actions":["combine"],
 			"type":"ingredient"
+			"further-actions":{
+				"boil":"bagel",
+				"bake":"bread",
+				"pan-fried":"fried_dough"
+			}
 		}
 	};
 	
 function process() {
-	document.getElementById("output").innerHTML = "You made some stuff"; 
-	document.getElementById("mix_box").checked
+	document.getElementById("compilation_check").innerHTML = "You made some stuff"; 
+	let selectedIngredients = [];
+	let rawInputs = ocument.getElementsByTagName("input");
+	for (let i = 0; i < rawInputs; i++) {
+		if (rawInputs[i].type == "checkbox") {
+			selectedIngredients.push(rawInputs[i].value);
+		}
+	}
+	document.getElementById("output").innerHTML = "Ingredients picked: " + selectedIngredients;
 }
 </script>
 	
-	<h2>Actions</h2>
+	<h2>Ingredients</h2>
 	<form action="process()">
-		<input type="checkbox" id="mix_box" value="mix">
-		<label for="mix_box"> Mix</label><br>
-		<input type="checkbox" id="roll_box" value="roll">
-		<label for="roll_box">Roll</label><br>
-		<input type="checkbox" id="bake_box" value="bake">
-		<label for="bake_box">Bake</label><br><br>
+		<input type="checkbox" id="flour_box" value="flour">
+		<label for="flour_box"> Mix</label><br>
+		<input type="checkbox" id="sugar_box" value="sugar">
+		<label for="sugar_box">Roll</label><br>
+		<input type="checkbox" id="water_box" value="water">
+		<label for="water_box">Bake</label><br><br>
 		<input type="submit" value="Submit">
 	</form>
 	<button>Go</button>
-	<p id="output">Result:</p>
+	<p id="output">Output</p>
+	<p id="compilation_check">Compilation check</p>
 </body>
