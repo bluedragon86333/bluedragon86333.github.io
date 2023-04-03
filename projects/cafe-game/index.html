@@ -15,6 +15,8 @@
 	
 	
 	*/
+const imgRoot = "./img/";
+
 var recipes = {
 	"recipes":[
 	{
@@ -55,7 +57,17 @@ var recipes = {
 		}
 	}
 ]};
+
+function 
+var inventory = [
+	{
 	
+	},
+	{
+	
+	}
+];
+
 function arrayCompare(_arr1, _arr2) {
     if (
       !Array.isArray(_arr1)
@@ -124,7 +136,15 @@ function process() {
 	
 }
 
-
+function drawIcon(foodName,x,y) {
+	const canvas = document.getElementById('game-canvas'); 
+	const context = canvas.getContext('2d'); 
+	const img = new Image();        
+	img.src = imgRoot + foodName + ".png";        
+	img.onload = () => {          
+		context.drawImage(img, x, y);      
+	};
+}
 </script>
 	
 	
@@ -155,4 +175,6 @@ function process() {
 	<p id="chosenIngredients">Output</p>
 	<p id="finalFoodResult">Final Food</p>
 	<p id="compilation_check">Compilation check</p>
+	
+	<canvas id="game-canvas" ></canvas>
 </body>
