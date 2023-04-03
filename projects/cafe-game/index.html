@@ -1,4 +1,60 @@
-<body>
+<head>
+	<title>Burrow's cafe game</title>
+	<style>
+#game-canvas {
+	width:1024px;
+	height:576px;
+	background-color:#efefef;
+	image-rendering: -moz-crisp-edges;
+	image-rendering: -webkit-crisp-edges;
+	image-rendering: pixelated;
+	background-image:url("./img/background.png");
+	background-size:contain;
+}
+
+.center {
+	margin:auto;
+}
+	</style>
+
+</head>
+<body onload="init()">
+
+	<div hidden>
+	<form>
+		<h2>Ingredients</h2>
+		<input type="checkbox" id="flour_box" value="flour">
+		<label for="flour_box">Flour</label><br>
+		<input type="checkbox" id="sugar_box" value="sugar">
+		<label for="sugar_box">Sugar</label><br>
+		<input type="checkbox" id="water_box" value="water">
+		<label for="water_box">Water</label><br>
+		<input type="checkbox" id="dough_box" value="dough">
+		<label for="dough_box">Dough</label><br>
+		<br>
+		<h2>Where to put?</h2>
+		<input type="radio" id="combine_radio" value="combine">
+		<label for="combine_radio">(Combine)</label><br>
+		<input type="radio" id="pot_radio" value="pot">
+		<label for="pot_radio">Pot</label><br>
+		<input type="radio" id="pan_radio" value="pan">
+		<label for="pan_radio">Pan</label><br>
+		<input type="radio" id="oven_radio" value="oven">
+		<label for="oven_radio">Oven</label>
+
+		<input type="button" onclick="process()" value="Submit">
+	</form>
+	
+	<p id="chosenIngredients">Output</p>
+	<p id="finalFoodResult">Final Food</p>
+	</div>
+	
+	<p id="compilation_check">Compilation check</p>
+	
+	<div class="center">
+		<canvas id="game-canvas" ></canvas>
+	</div>
+	
 <script>
 	/*
 	{
@@ -15,8 +71,15 @@
 	
 	
 	*/
-const imgRoot = "./img/";
 
+//image global vars	
+const imgRoot = "./img/";
+const canvas = document.getElementById('game-canvas'); 
+const context = canvas.getContext('2d');
+context.imageSmoothingEnabled= false;
+var background = new Image();
+
+//recipes
 var recipes = {
 	"recipes":[
 	{
@@ -58,15 +121,30 @@ var recipes = {
 	}
 ]};
 
-function 
-var inventory = [
+
+var inventory = {
+	"inventory":[
 	{
-	
+		"name":"flour",
+		"unlimited":true,
+		"qty":0
 	},
 	{
-	
+		"name":"water",
+		"unlimited":true,
+		"qty":0
+	},
+	{
+		"name":"egg",
+		"unlimited":true,
+		"qty":0
+	},
+	{
+		"name":"egg",
+		"unlimited":true,
+		"qty":0
 	}
-];
+]};
 
 function arrayCompare(_arr1, _arr2) {
     if (
@@ -137,44 +215,48 @@ function process() {
 }
 
 function drawIcon(foodName,x,y) {
-	const canvas = document.getElementById('game-canvas'); 
-	const context = canvas.getContext('2d'); 
 	const img = new Image();        
 	img.src = imgRoot + foodName + ".png";        
-	img.onload = () => {          
-		context.drawImage(img, x, y);      
+	img.onload = () => {
+		context.drawImage(img, x, y,16,16);      
 	};
 }
+
+function drawStatusBar() {
+	let tlx = 72;
+	let tly = 125;
+	let spacing = 6;
+	let hotbarWidth = 7;
+	for (let i = 0; i < hotbarWidth; i++) {
+		if (i - 1 > inventory.inventory.length) {
+			break;
+		}
+		drawIcon(inventory.inventory[i].name,tlx + i * (16 + spacing),tly);
+	}
+}
+
+function drawAll() {
+	//context.drawImage(background,0,0,256,144);     
+	drawStatusBar();
+}
+
+function init() {
+	
+	background.src = imgRoot + "background.png";
+	background.onload = function(){
+		//context.drawImage(background,0,0,256,144);   
+	}
+}
+
+var mainloop = setInterval(function() {
+	drawAll();
+	if (1 == 0) {
+		clearInterval(mainloop);
+	}
+},300);
+
 </script>
 	
 	
-	<form>
-		<h2>Ingredients</h2>
-		<input type="checkbox" id="flour_box" value="flour">
-		<label for="flour_box">Flour</label><br>
-		<input type="checkbox" id="sugar_box" value="sugar">
-		<label for="sugar_box">Sugar</label><br>
-		<input type="checkbox" id="water_box" value="water">
-		<label for="water_box">Water</label><br>
-		<input type="checkbox" id="dough_box" value="dough">
-		<label for="dough_box">Dough</label><br>
-		<br>
-		<h2>Where to put?</h2>
-		<input type="radio" id="combine_radio" value="combine">
-		<label for="combine_radio">(Combine)</label><br>
-		<input type="radio" id="pot_radio" value="pot">
-		<label for="pot_radio">Pot</label><br>
-		<input type="radio" id="pan_radio" value="pan">
-		<label for="pan_radio">Pan</label><br>
-		<input type="radio" id="oven_radio" value="oven">
-		<label for="oven_radio">Oven</label>
 
-		<input type="button" onclick="process()" value="Submit">
-	</form>
-	
-	<p id="chosenIngredients">Output</p>
-	<p id="finalFoodResult">Final Food</p>
-	<p id="compilation_check">Compilation check</p>
-	
-	<canvas id="game-canvas" ></canvas>
 </body>
