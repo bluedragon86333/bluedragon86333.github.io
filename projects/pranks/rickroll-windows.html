@@ -1,103 +1,262 @@
-<DOCTYPE!html>
 <head>
-<title>;)</title>
-<style>
-	@font-face {
-		font-family: 'SegoeUI'; /*a name to be used later*/
-		src: url('./Segoe-UI.TTF'); /*URL to font*/
-	}
-	
-	body {
-		background-image: url("windows10-beach.jpg");
-		background-size:contain;
-		background-repeat:no-repeat;
-	}
-	
-	h1,h2,h3,p {
-		font-weight:lighter;
-		font-family:SegoeUI;
-		color:#ffffff;
-		user-select: none;
-	}
-	/*
-	#wholeScrn {
-		width:100%;
-		height:100%;
-	}
-	*/
-
-	#time {
-		font-size:900%;
-		margin-bottom:-11%;
-	}
-	
-	#date {
-		font-size:400%;
-	}
-	
-	#dateTime {
-		width:40%;
-		margin-top:38.5%;
-		margin-left:8%;
-	}
-</style>
-</head>
-<body onclick="changeURL()">
-<script>
-	function changeURL() {
-		window.location.replace("./rickroll-UI.html");
-	}
-
-	document.addEventListener('contextmenu', event => event.preventDefault());
-	document.addEventListener('mousedown', event => changeURL());
-	
-var x = setInterval(function() {
-	const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-	const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-	
-	var now = new Date();
-	
-	var hours = now.getHours();
-	if (hours > 12) {
-		hours -= 12;
-	}
-	var minutes = now.getMinutes();
-	if (minutes < 10) {
-		minutes = "0" + now.getMinutes();
-	}
-	
-	var currentDay = days[now.getDay()];
-	console.log(currentDay);
-	
-	document.getElementById("time").innerHTML = hours + ":" + minutes;
-	document.getElementById("date").innerHTML = currentDay + ", " + months[now.getMonth()] + " " + now.getDate();
-	if (1 == 0) {
-		clearInterval(x);
-	}
-},100);
-
-document.body.onkeydown = function(e) {
-  if (e.key == " " ||
-      e.code == "Space" ||      
-      e.keyCode == 32 ||
-      e.keyCode == 17 ||
-      e.keyCode == "Ctrl" ||
-      e.keyCode == "CTRL" ||
-      e.keyCode == 25 || //alt
-      e.keyCode == 16 || //shift
-      e.keyCode == 13 //enter
-  ) {
-    window.location.replace("./rickroll-UI.html");
-  }
+	<title>Burrow's cafe game</title>
+	<style>
+#game-canvas {
+	width:1024px;
+	height:576px;
+	background-color:#efefef;
+	image-rendering: -moz-crisp-edges;
+	image-rendering: -webkit-crisp-edges;
+	image-rendering: pixelated;
+	background-image:url("./img/background.png");
+	background-size:contain;
 }
 
+.center {
+	margin:auto;
+}
+	</style>
 
+</head>
+<body onload="init()">
+
+	<div hidden>
+	<form>
+		<h2>Ingredients</h2>
+		<input type="checkbox" id="flour_box" value="flour">
+		<label for="flour_box">Flour</label><br>
+		<input type="checkbox" id="sugar_box" value="sugar">
+		<label for="sugar_box">Sugar</label><br>
+		<input type="checkbox" id="water_box" value="water">
+		<label for="water_box">Water</label><br>
+		<input type="checkbox" id="dough_box" value="dough">
+		<label for="dough_box">Dough</label><br>
+		<br>
+		<h2>Where to put?</h2>
+		<input type="radio" id="combine_radio" value="combine">
+		<label for="combine_radio">(Combine)</label><br>
+		<input type="radio" id="pot_radio" value="pot">
+		<label for="pot_radio">Pot</label><br>
+		<input type="radio" id="pan_radio" value="pan">
+		<label for="pan_radio">Pan</label><br>
+		<input type="radio" id="oven_radio" value="oven">
+		<label for="oven_radio">Oven</label>
+
+		<input type="button" onclick="process()" value="Submit">
+	</form>
+	
+	<p id="chosenIngredients">Output</p>
+	<p id="finalFoodResult">Final Food</p>
+	</div>
+	
+	<p id="compilation_check">Compilation check</p>
+	
+	<div class="center">
+		<canvas id="game-canvas" ></canvas>
+	</div>
+	
+<script>
+	/*
+	{
+		"name":"",
+		"ingredients":[""], 
+		"actions":"",
+		"type":"ingredient",
+		"further-actions":{
+			"cutter":""
+		}
+	}
+	
+	
+	
+	
+	*/
+
+//image global vars	
+const imgRoot = "./img/";
+const canvas = document.getElementById('game-canvas'); 
+const context = canvas.getContext('2d');
+context.imageSmoothingEnabled= false;
+var background = new Image();
+
+//recipes
+var recipes = {
+	"recipes":[
+	{
+		"name":"dough",
+		"ingredients":["flour","water"], 
+		"actions":"combine",
+		"type":"ingredient",
+		"further-actions":{
+			"pot":"bagel",
+			"oven":"bread",
+			"pan":"fried_dough"
+		}
+	},
+	{
+		"name":"bread",
+		"ingredients":["dough"], 
+		"actions":"oven",
+		"type":"ingredient",
+		"further-actions":{
+			"cutter":"sliced_bread"
+		}
+	},
+	{
+		"name":"fried_dough",
+		"ingredients":["dough"], 
+		"actions":"pan",
+		"type":"dish",
+		"further-actions":{
+			
+		}
+	},
+	{
+		"name":"bagel",
+		"ingredients":["dough"], 
+		"actions":"oven",
+		"type":"ingredient",
+		"further-actions":{
+		}
+	}
+]};
+
+
+var inventory = {
+	"inventory":[
+	{
+		"name":"flour",
+		"unlimited":true,
+		"qty":0
+	},
+	{
+		"name":"water",
+		"unlimited":true,
+		"qty":0
+	},
+	{
+		"name":"egg",
+		"unlimited":true,
+		"qty":0
+	},
+	{
+		"name":"egg",
+		"unlimited":true,
+		"qty":0
+	}
+]};
+
+function arrayCompare(_arr1, _arr2) {
+    if (
+      !Array.isArray(_arr1)
+      || !Array.isArray(_arr2)
+      || _arr1.length !== _arr2.length
+      ) {
+        return false;
+      }
+    
+    // .concat() to not mutate arguments
+    const arr1 = _arr1.concat().sort();
+    const arr2 = _arr2.concat().sort();
+    
+    for (let i = 0; i < arr1.length; i++) {
+        if (arr1[i] !== arr2[i]) {
+            return false;
+         }
+    }
+    
+    return true;
+}
+
+function process() {
+	//var declaration
+	let selectedIngredients = [];
+	let rawInputs = document.getElementsByTagName("input");
+	let selectedRadio = "";
+	//let baseFood = "";
+	let finalFood = "";
+	
+	//iterate through inputs on form
+	for (let i = 0; i < rawInputs.length; i++) {
+		if (rawInputs[i].type == "checkbox") { //get ingredients
+			if (rawInputs[i].checked) {
+				
+				selectedIngredients.push(rawInputs[i].value);
+			}
+			
+		} else if (rawInputs[i].type == "radio") { //get action
+			if (rawInputs[i].checked) {
+				selectedRadio = rawInputs[i].value;
+			}
+		}
+	}
+	console.log("selectedIngredients: " + selectedIngredients);
+	console.log("how many recipes: " + recipes.recipes.length);
+	//get finalFood from chosen ingredients
+	
+	for (let i = 0; i < recipes.recipes.length;i++) {
+		//console.log("recipes[" + i + "].ingredients: " + recipes.recipes[i].ingredients);
+		if (arrayCompare(recipes.recipes[i].ingredients,selectedIngredients)) { //are ingredients the same?
+			if (recipes.recipes[i].actions == selectedRadio) { //is action correct?
+				finalFood = recipes.recipes[i].name;
+				break;
+			}
+		}
+	}
+	if (finalFood == "") {
+		finalFood = "complete shit";
+	}
+	
+	//prints results to HTML
+	document.getElementById("compilation_check").innerHTML = "Compiled successfully";
+	document.getElementById("chosenIngredients").innerHTML = "Ingredients picked: " + selectedIngredients;
+	document.getElementById("finalFoodResult").innerHTML = "You made: <b>" + finalFood + "</b> in the " + selectedRadio;
+	
+}
+
+function drawIcon(foodName,x,y) {
+	const img = new Image();        
+	img.src = imgRoot + foodName + ".png";        
+	img.onload = () => {
+		context.drawImage(img, x, y,16,16);      
+	};
+}
+
+function drawStatusBar() {
+	let tlx = 72;
+	let tly = 125;
+	let spacing = 6;
+	let hotbarWidth = 7;
+	for (let i = 0; i < hotbarWidth; i++) {
+		if (i - 1 > inventory.inventory.length) {
+			break;
+		}
+		drawIcon(inventory.inventory[i].name,tlx + i * (16 + spacing),tly);
+	}
+}
+
+function drawAll() {
+	//context.drawImage(background,0,0,256,144);     
+	drawStatusBar();
+}
+
+function init() {
+	
+	background.src = imgRoot + "background.png";
+	background.onload = function(){
+		//context.drawImage(background,0,0,256,144);   
+	}
+}
+
+var mainloop = setInterval(function() {
+	drawAll();
+	if (1 == 0) {
+		clearInterval(mainloop);
+	}
+},300);
 
 </script>
-
-	<div id="dateTime">
-		<h1 id="time">12:20</h1>
-		<p id="date">Friday, March 31</p>
-	</div>
+	
+	
 
 </body>
