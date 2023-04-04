@@ -56,7 +56,7 @@ p {
 	<p id="mouseCoords">Click canvas for mouse coords</p>
 	<p hidden><b id="mouseX"></b>,<b id="mouseY"></b></p>
 	<p id="mouseDown"></p>
-	
+	<p id="lastLoose">Drop an object to see its deets bro</p>
 	<div class="center">
 		<canvas width="512" height="288" id="game-canvas" ></canvas>
 	</div>
@@ -79,6 +79,12 @@ p {
 	*/
 	
 //
+
+var scrn = {
+	"width":512,
+	"height":288
+};
+
 var selectedItem = -1;
 var counter = {
 	"minY":140,
@@ -246,15 +252,86 @@ function process() {
 }
 
 var looseItems = [];
+var maxVel = 3;
+var gravityMod = 1.2;
 
 function makeLooseItem(name,x,y) {
 	let temp = {
 		"name":name,
 		"x":x,
-		"y":y
+		"y":y,
+		"yv":2,
+		"targetY":-1
 	};
 	looseItems.push(temp);
 	console.log("new loose item '" + temp.name + "' at " + temp.x + "," + temp.y);
+}
+
+function processLooseItems() {
+	var toDelete = [];
+	for (let i = 0; i < looseItems.length; i++) {
+		if (looseItems[i].targetY == -1) { //first frame?
+			if (looseItems[i].y < counter.maxY) { //on or above counter?
+				if (looseItems[i].y < counter.minY) { //above counter
+					console.log("above counter");
+					looseItems[i].targetY = Math.floor(Math.random() * (counter.maxY - counter.minY)) + counter.minY;
+				} else { //on counter
+					console.log("on counter");
+					looseItems[i].targetY = looseItems[i].y;
+					
+				}
+			} else { //below counter
+				console.log("below counter");
+				looseItems[i].targetY = 300;
+			}
+		} else { //processing post-drop
+			if (looseItems[i].y < looseItems[i].targetY && looseItems[i].y < scrn.height) {
+				//console.log("y < targetY; " + looseItems[i].y + " < " + looseItems[i].targetY);
+				looseItems[i].y++;//looseItems[i].yv;
+			}
+			
+			if (looseItems[i].yv < maxVel) { //still accelerating
+				console.log("yv is under maxVel");
+
+				looseItems[i].yv = looseItems[i].yv * gravityMod;
+			} else {
+				looseItems[i].yv = maxVel;
+			}
+			
+		}
+
+		
+		/*
+		if (looseItems[i].targetY == -1) { //if destination not set
+			if (looseItems[i].y > counter.maxY) { //if below counter, fall off screen
+				looseItems[i].targetY = 500;
+			}
+			if (looseItems[i].y < counter.minY) { //if above counter, fall onto counter
+				looseItems[i].targetY = Math.floor(Math.random() * (counter.maxY - counter.minY)) + counter.minY;
+			}
+			
+		}
+		else {
+			if (looseItems[i].yv < maxVel) {
+				looseItems[i].y += looseItems[i].yv;
+				looseItems[i].yv *= gravityMod;
+			} else {
+				looseItems[i].yv = maxVel;
+			}
+		}
+		
+		if (looseItems[i].y > scrn.height) { //deletes offscreen items
+			toDelete.push(i);
+		}
+		*/
+	}
+	for (let i = 0; i < toDelete.length; i++) {
+		//delete looseItems[i];
+	}
+	if (looseItems.length > 0) {
+		let lastLoose = looseItems[looseItems.length - 1];
+		document.getElementById("lastLoose").innerHTML = "position:(" + lastLoose.x + "," + lastLoose.y + ")<br>targetY:" + lastLoose.targetY + "<br>yv:" + lastLoose.yv;
+	}
 }
 
 var water = new Image();
@@ -356,6 +433,8 @@ function processes() {
 	if (!mouseDown) {
 		selectedItem = -1;
 	}
+	
+	processLooseItems();
 }
 
 var mainloop = setInterval(function() {
