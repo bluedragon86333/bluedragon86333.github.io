@@ -241,7 +241,14 @@ function process() {
 	
 }
 
+var water = new Image();
+water.src = imgRoot + "water.png"; 
+
 function drawIcon(foodName,x,y) {
+	if (foodName == "water") {
+		context.drawImage(water,x,y);
+	}
+	
 	const img = new Image();        
 	img.src = imgRoot + foodName + ".png";        
 	img.onload = () => {
@@ -262,22 +269,20 @@ function drawStatusBar() {
 		if (i > inventory.inventory.length - 1) {
 			break;
 		}
-		if (selectedItem == i && mouseDown) {
-			drawIcon(inventory.inventory[i].name,mouseX,mouseY);
-		} else {
-			drawIcon(inventory.inventory[i].name,tlx + i * (32 + spacing),tly);
-		}
-		if (mouseJustDown) { //checks if you selected something
+		if (mouseJustDown) { //checks if you just clicked down last frame
 			mouseJustDown = false;
-			let mouseX = document.getElementById("mouseX").innerHTML;
-			let mouseY = document.getElementById("mouseY").innerHTML;
 			if (tlx + i * (32 + spacing) < mouseX && mouseX < tlx + 32 + i * (32 + spacing)) {
-				console.log("x range is correct");
+				console.log("x range is correct when i = " + i);
 				if (tly < mouseY && mouseY < tly + 32) {
 					console.log("touching: " + inventory.inventory[i].name);
 					selectedItem = i;
 				}
 			}
+		}
+		if (selectedItem == i && mouseDown) {
+			drawIcon(inventory.inventory[i].name,mouseX,mouseY);
+		} else {
+			drawIcon(inventory.inventory[i].name,tlx + i * (32 + spacing),tly);
 		}
 		
 	}
@@ -291,11 +296,7 @@ function drawAll() {
 }
 
 function init() {
-	
-	background.src = imgRoot + "background.png";
-	background.onload = function(){
-		//context.drawImage(background,0,0,256,144);   
-	}
+
 }
 
 function processes() {
