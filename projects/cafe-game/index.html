@@ -50,9 +50,10 @@
 	</div>
 	
 	<p id="mouseCoords">Click canvas for mouse coords</p>
+	<p id="mouseDown"></p>
 	
 	<div class="center">
-		<canvas id="game-canvas" ></canvas>
+		<canvas width="512" height="288" id="game-canvas" ></canvas>
 	</div>
 	
 <script>
@@ -71,6 +72,9 @@
 	
 	
 	*/
+	
+//
+var selectedItem = -1;
 
 //image global vars	
 const imgRoot = "./img/";
@@ -140,7 +144,7 @@ var inventory = {
 		"qty":0
 	},
 	{
-		"name":"egg",
+		"name":"sugar",
 		"unlimited":true,
 		"qty":0
 	}
@@ -149,11 +153,18 @@ var inventory = {
 var appliances = {
 	"appliances":[
 	{
-		"name":"oven",
-		"tlx":0,
-		"tly":0,
-		"width":50,
-		"height":50
+		"name":"pan",
+		"tlx":497,
+		"tly":300,
+		"brx":916,
+		"bry":427
+	},
+	{
+		"name":"combine",
+		"tlx":102,
+		"tly":262,
+		"brx":492,
+		"bry":427
 	}
 ]};
 
@@ -229,26 +240,29 @@ function drawIcon(foodName,x,y) {
 	const img = new Image();        
 	img.src = imgRoot + foodName + ".png";        
 	img.onload = () => {
-		context.drawImage(img, x, y,16,16);      
+		context.drawImage(img, x, y);      
 	};
 }
 
 function drawStatusBar() {
-	let tlx = 72;
-	let tly = 125;
+	let tlx = 120;
+	let tly = 242;
 	let spacing = 6;
 	let hotbarWidth = 7;
 	for (let i = 0; i < hotbarWidth; i++) {
 		if (i - 1 > inventory.inventory.length) {
 			break;
 		}
-		drawIcon(inventory.inventory[i].name,tlx + i * (16 + spacing),tly);
+		
+		drawIcon(inventory.inventory[i].name,tlx + i * (32 + spacing),tly);
 	}
 }
 
 function drawAll() {
 	//context.drawImage(background,0,0,256,144);     
 	drawStatusBar();
+	//drawIcon("egg",0,0);
+	//drawIcon("egg",32,32,32,32,32,32);
 }
 
 function init() {
