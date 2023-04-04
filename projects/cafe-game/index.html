@@ -15,6 +15,10 @@
 .center {
 	margin:auto;
 }
+
+p { 
+	user-select: none;
+}
 	</style>
 
 </head>
@@ -50,6 +54,7 @@
 	</div>
 	
 	<p id="mouseCoords">Click canvas for mouse coords</p>
+	<p><b id="mouseX"></b>,<b id="mouseY"></b></p>
 	<p id="mouseDown"></p>
 	
 	<div class="center">
@@ -249,12 +254,32 @@ function drawStatusBar() {
 	let tly = 242;
 	let spacing = 6;
 	let hotbarWidth = 7;
+	
+	let mouseX = document.getElementById("mouseX").innerHTML;
+	let mouseY = document.getElementById("mouseY").innerHTML;
+	
 	for (let i = 0; i < hotbarWidth; i++) {
-		if (i - 1 > inventory.inventory.length) {
+		if (i > inventory.inventory.length - 1) {
 			break;
 		}
+		if (selectedItem == i && mouseDown) {
+			drawIcon(inventory.inventory[i].name,mouseX,mouseY);
+		} else {
+			drawIcon(inventory.inventory[i].name,tlx + i * (32 + spacing),tly);
+		}
+		if (mouseJustDown) { //checks if you selected something
+			mouseJustDown = false;
+			let mouseX = document.getElementById("mouseX").innerHTML;
+			let mouseY = document.getElementById("mouseY").innerHTML;
+			if (tlx + i * (32 + spacing) < mouseX && mouseX < tlx + 32 + i * (32 + spacing)) {
+				console.log("x range is correct");
+				if (tly < mouseY && mouseY < tly + 32) {
+					console.log("touching: " + inventory.inventory[i].name);
+					selectedItem = i;
+				}
+			}
+		}
 		
-		drawIcon(inventory.inventory[i].name,tlx + i * (32 + spacing),tly);
 	}
 }
 
@@ -273,12 +298,20 @@ function init() {
 	}
 }
 
+function processes() {
+	if (!mouseDown) {
+		selectedItem = -1;
+	}
+}
+
 var mainloop = setInterval(function() {
+	context.clearRect(0, 0, canvas.width, canvas.height);
+	processes();
 	drawAll();
 	if (1 == 0) {
 		clearInterval(mainloop);
 	}
-},300);
+},30);
 
 </script>
 	
