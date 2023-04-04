@@ -54,7 +54,7 @@ p {
 	</div>
 	
 	<p id="mouseCoords">Click canvas for mouse coords</p>
-	<p><b id="mouseX"></b>,<b id="mouseY"></b></p>
+	<p hidden><b id="mouseX"></b>,<b id="mouseY"></b></p>
 	<p id="mouseDown"></p>
 	
 	<div class="center">
@@ -283,6 +283,8 @@ function drawIcon(foodName,x,y,width,height) {
 }
 
 function drawLooseItems() {
+	//let mouseX = parseInt(document.getElementById("mouseX").innerHTML);
+	//let mouseY = document.getElementById("mouseY").innerHTML.toString();
 	for (let i = 0;i < looseItems.length; i++) {
 		drawIcon(looseItems[i].name,looseItems[i].x,looseItems[i].y);
 	}
@@ -294,8 +296,6 @@ function drawStatusBar() {
 	let spacing = 6;
 	let hotbarWidth = 7;
 	
-	let mouseX = parseInt(document.getElementById("mouseX").innerHTML);
-	let mouseY = document.getElementById("mouseY").innerHTML.toString();
 	if (mouseJustDown) {
 		console.log("mouse at " + mouseX + "," + mouseY);
 	}
@@ -338,7 +338,7 @@ function drawStatusBar() {
 function drawAll() {
 	//context.drawImage(background,0,0,256,144);     
 	drawStatusBar();
-	//drawLooseItems();
+	drawLooseItems();
 	//drawIcon("egg",0,0);
 	//drawIcon("egg",32,32,32,32,32,32);
 }
