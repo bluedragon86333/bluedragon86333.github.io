@@ -241,12 +241,24 @@ function process() {
 	
 }
 
+var looseItems = [];
+
+function addLooseItem(name,x,y) {
+	
+}
+
 var water = new Image();
 water.src = imgRoot + "water.png"; 
+
+var flour = new Image();
+flour.src = imgRoot + "flour.png"; 
 
 function drawIcon(foodName,x,y) {
 	if (foodName == "water") {
 		context.drawImage(water,x,y);
+	}
+	if (foodName == "flour") {
+		context.drawImage(flour,x,y);
 	}
 	
 	const img = new Image();        
@@ -266,13 +278,15 @@ function drawStatusBar() {
 	let mouseY = document.getElementById("mouseY").innerHTML;
 	
 	for (let i = 0; i < hotbarWidth; i++) {
+			//console.log("at " + i + ", mouse needs to be between (" + (tlx + i * (32 + spacing)) + "," + tly + ") and (" + (tlx + 32 + i * (32 + spacing)) + "," + (tly + 32) + ")");
+		
 		if (i > inventory.inventory.length - 1) {
 			break;
 		}
 		if (mouseJustDown) { //checks if you just clicked down last frame
-			mouseJustDown = false;
+			
 			if (tlx + i * (32 + spacing) < mouseX && mouseX < tlx + 32 + i * (32 + spacing)) {
-				console.log("x range is correct when i = " + i);
+				//console.log("x range is correct when i = " + i);
 				if (tly < mouseY && mouseY < tly + 32) {
 					console.log("touching: " + inventory.inventory[i].name);
 					selectedItem = i;
@@ -286,6 +300,7 @@ function drawStatusBar() {
 		}
 		
 	}
+	mouseJustDown = false;
 }
 
 function drawAll() {
