@@ -2,7 +2,11 @@
 //var canvas = document.getElementById("game-canvas");
 var mouseDown = false;
 var mouseJustDown = false;
+var mouseJustUp = false;
+var mouseX,mouseY;
 //report the mouse position on click
+
+
 canvas.addEventListener("mousedown", function (evt) {
     var mousePos = getMousePos(canvas, evt);
 	mouseDown = true;
@@ -10,10 +14,12 @@ canvas.addEventListener("mousedown", function (evt) {
 	mouseJustDown = true;
 }, false);
 
+
 canvas.addEventListener("mousemove", getPosition, false);
 
 canvas.addEventListener("mouseup", function (evt) {
 	mouseDown = false;
+	mouseJustUp = true;
 }, false);
 
 //Get Mouse Position
@@ -51,8 +57,13 @@ function getPosition(event){
     
     x -= canvas.offsetLeft;
     y -= canvas.offsetTop;
-    document.getElementById("mouseCoords").innerHTML = "X = " + x.toString() + " , Y = " + y.toString();
-	document.getElementById("mouseX").innerHTML = Math.round(x / 2);
-	document.getElementById("mouseY").innerHTML = Math.round(y / 2);
+	x = Math.round(x / 2);
+	y = Math.round(y / 2);
+	
+	mouseX = x.toString();
+	mouseY = y.toString();
+    document.getElementById("mouseCoords").innerHTML = "Mouse at (" + x.toString() + "," + y.toString() + ")";
+	//document.getElementById("mouseX").innerHTML = x;
+	//document.getElementById("mouseY").innerHTML = y;
     
 }
