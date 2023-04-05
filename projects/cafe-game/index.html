@@ -86,6 +86,7 @@ var scrn = {
 };
 
 var selectedItem = -1;
+var selectedLooseItem = -1;
 var counter = {
 	"minY":140,
 	"maxY":218
@@ -137,6 +138,30 @@ var recipes = {
 		"type":"ingredient",
 		"further-actions":{
 		}
+	},
+	{
+		"name":"sugar",
+		"type":"baseIngredient"
+	},
+	{
+		"name":"flour",
+		"type":"baseIngredient"
+	},
+	{
+		"name":"water",
+		"type":"baseIngredient"
+	},
+	{
+		"name":"egg",
+		"type":"baseIngredient"
+	},
+	{
+		"name":"apple",
+		"type":"baseIngredient"
+	},
+	{
+		"name":"citron",
+		"type":"baseIngredient"
 	}
 ]};
 
@@ -252,15 +277,15 @@ function process() {
 }
 
 var looseItems = [];
-var maxVel = 3;
-var gravityMod = 1.2;
+var maxVel = 6;
+var gravityMod = 1.05;
 
 function makeLooseItem(name,x,y) {
 	let temp = {
 		"name":name,
 		"x":x,
 		"y":y,
-		"yv":2,
+		"yv":1,
 		"targetY":-1
 	};
 	looseItems.push(temp);
@@ -270,11 +295,15 @@ function makeLooseItem(name,x,y) {
 function processLooseItems() {
 	var toDelete = [];
 	for (let i = 0; i < looseItems.length; i++) {
-		if (looseItems[i].targetY == -1) { //first frame?
+		if (selectedLooseItem == i) {
+			looseItems[i].x = parseInt(mouseX);
+			looseItems[i].y = parseInt(mouseY);
+		}
+		else if (looseItems[i].targetY == -1) { //first frame?
 			if (looseItems[i].y < counter.maxY) { //on or above counter?
 				if (looseItems[i].y < counter.minY) { //above counter
 					console.log("above counter");
-					looseItems[i].targetY = Math.floor(Math.random() * (counter.maxY - counter.minY)) + counter.minY;
+					looseItems[i].targetY = Math.floor(Math.random() * (counter.maxY - counter.minY)) + counter.minY - 16;
 				} else { //on counter
 					console.log("on counter");
 					looseItems[i].targetY = looseItems[i].y;
@@ -287,7 +316,7 @@ function processLooseItems() {
 		} else { //processing post-drop
 			if (looseItems[i].y < looseItems[i].targetY && looseItems[i].y < scrn.height) {
 				//console.log("y < targetY; " + looseItems[i].y + " < " + looseItems[i].targetY);
-				looseItems[i].y++;//looseItems[i].yv;
+				looseItems[i].y = parseInt(looseItems[i].y) + maxVel;//looseItems[i].yv;
 			}
 			
 			if (looseItems[i].yv < maxVel) { //still accelerating
@@ -299,31 +328,6 @@ function processLooseItems() {
 			}
 			
 		}
-
-		
-		/*
-		if (looseItems[i].targetY == -1) { //if destination not set
-			if (looseItems[i].y > counter.maxY) { //if below counter, fall off screen
-				looseItems[i].targetY = 500;
-			}
-			if (looseItems[i].y < counter.minY) { //if above counter, fall onto counter
-				looseItems[i].targetY = Math.floor(Math.random() * (counter.maxY - counter.minY)) + counter.minY;
-			}
-			
-		}
-		else {
-			if (looseItems[i].yv < maxVel) {
-				looseItems[i].y += looseItems[i].yv;
-				looseItems[i].yv *= gravityMod;
-			} else {
-				looseItems[i].yv = maxVel;
-			}
-		}
-		
-		if (looseItems[i].y > scrn.height) { //deletes offscreen items
-			toDelete.push(i);
-		}
-		*/
 	}
 	for (let i = 0; i < toDelete.length; i++) {
 		//delete looseItems[i];
@@ -334,18 +338,50 @@ function processLooseItems() {
 	}
 }
 
-var water = new Image();
-water.src = imgRoot + "water.png"; 
+var images = [];
+function loadImages() {
+	for (let i = 0; i < recipes.recipes.length;i++) {
+		let temp = new Image();
+		temp.src = imgRoot + recipes.recipes[i].name + ".png";
+		temp.onload = () => {
+			let tempArr = [recipes.recipes[i].name,temp];
+			images.push(tempArr);
+		};
+	}
 
-var flour = new Image();
-flour.src = imgRoot + "flour.png"; 
+}
+
+
+function drawEllipse(x, y, w, h) {
+  var kappa = .5522848,
+      ox = (w / 2) * kappa, // control point offset horizontal
+      oy = (h / 2) * kappa, // control point offset vertical
+      xe = x + w,           // x-end
+      ye = y + h,           // y-end
+      xm = x + w / 2,       // x-middle
+      ym = y + h / 2;       // y-middle
+
+  context.beginPath();
+  context.moveTo(x, ym);
+  context.bezierCurveTo(x, ym - oy, xm - ox, y, xm, y);
+  context.bezierCurveTo(xm + ox, y, xe, ym - oy, xe, ym);
+  context.bezierCurveTo(xe, ym + oy, xm + ox, ye, xm, ye);
+  context.bezierCurveTo(xm - ox, ye, x, ym + oy, x, ym);
+  //ctx.closePath(); // not used correctly, see comments (use to close off open path)
+  context.fillStyle = "#00000088";
+  context.fill();
+}
 
 function drawIcon(foodName,x,y,width,height) {
-	if (foodName == "water") {
-		context.drawImage(water,x,y);
-	}
-	if (foodName == "flour") {
-		context.drawImage(flour,x,y);
+	for (let i = 0; i < images.length; i++) {
+		if (images[i][0] == foodName) {
+			if (arguments.length == 3) {
+				context.drawImage(images[i][1], x, y); 
+			} else if (arguments.length == 5) {
+				context.drawImage(images[i][1], x, y,width,height); 
+			}
+			return;
+		}
 	}
 
 	const img = new Image();        
@@ -363,6 +399,8 @@ function drawLooseItems() {
 	//let mouseX = parseInt(document.getElementById("mouseX").innerHTML);
 	//let mouseY = document.getElementById("mouseY").innerHTML.toString();
 	for (let i = 0;i < looseItems.length; i++) {
+		width = (looseItems[i].targetY - looseItems[i].y) / 10;
+		drawEllipse(looseItems[i].x + width / 2,looseItems[i].targetY + 20,32 - width,16);
 		drawIcon(looseItems[i].name,looseItems[i].x,looseItems[i].y);
 	}
 }
@@ -372,7 +410,6 @@ function drawStatusBar() {
 	let tly = 242;
 	let spacing = 6;
 	let hotbarWidth = 7;
-	
 	if (mouseJustDown) {
 		console.log("mouse at " + mouseX + "," + mouseY);
 	}
@@ -409,19 +446,46 @@ function drawStatusBar() {
 		
 		
 	}
-	mouseJustDown = false;
+	if (selectedItem != -1) {
+		mouseJustDown = false;
+	}
+	
 }
+
+function getLooseHover() {
+	for (let i = 0; i < looseItems.length; i++) {
+		let tlx = looseItems[i].x;
+		let tly = looseItems[i].y;
+		if (tlx < mouseX && mouseX < tlx + 32) {
+			//console.log("x range is correct when i = " + i);
+			if (tly < mouseY && mouseY < tly + 32) {
+				return i;
+				if (mouseJustDown) {
+					selectedItem = i;
+					mouseJustDown = false;
+				}
+				
+			}
+		}
+	}
+	
+	
+	return -1;
+}
+
 
 function drawAll() {
 	//context.drawImage(background,0,0,256,144);     
-	drawStatusBar();
+	
 	drawLooseItems();
+	//drawStatusBar();
 	//drawIcon("egg",0,0);
 	//drawIcon("egg",32,32,32,32,32,32);
 }
 
 function init() {
-
+	console.log("init() loaded!");
+	loadImages();
 }
 
 function processes() {
@@ -430,8 +494,14 @@ function processes() {
 		mouseJustUp = false;
 		console.log("# of loose items: " + looseItems.length);
 	}
+	drawStatusBar();
+	if (mouseJustDown && selectedItem == -1) {
+		selectedLooseItem = getLooseHover();
+		mouseJustDown = false;
+	}
 	if (!mouseDown) {
 		selectedItem = -1;
+		selectedLooseItem = -1;
 	}
 	
 	processLooseItems();
@@ -439,8 +509,9 @@ function processes() {
 
 var mainloop = setInterval(function() {
 	context.clearRect(0, 0, canvas.width, canvas.height);
-	processes();
 	drawAll();
+	processes();
+	
 	if (1 == 0) {
 		clearInterval(mainloop);
 	}
