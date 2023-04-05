@@ -10,14 +10,19 @@
 	image-rendering: pixelated;
 	background-image:url("./img/background.png");
 	background-size:contain;
+	margin: auto;
 }
 
 .center {
 	margin:auto;
+	text-align:center;
 }
 
 p { 
 	user-select: none;
+}
+#game-div {
+	margin:auto;
 }
 	</style>
 
@@ -55,9 +60,10 @@ p {
 	
 	<p id="mouseCoords">Click canvas for mouse coords</p>
 	<p hidden><b id="mouseX"></b>,<b id="mouseY"></b></p>
-	<p id="mouseDown"></p>
+	<p id="mouseDown">mouseDown = false</p>
 	<p id="lastLoose">Drop an object to see its deets bro</p>
-	<div class="center">
+	<div class="center" id="game-div">
+		<h2 id="message">  </h2>
 		<canvas width="512" height="288" id="game-canvas" ></canvas>
 	</div>
 	
@@ -84,6 +90,7 @@ var scrn = {
 	"width":512,
 	"height":288
 };
+var framerate = 30;
 
 var selectedItem = -1;
 var selectedLooseItem = -1;
@@ -98,6 +105,32 @@ const canvas = document.getElementById('game-canvas');
 const context = canvas.getContext('2d');
 context.imageSmoothingEnabled= false;
 var background = new Image();
+
+var message = {
+	"content":"",
+	"duration":0,
+	"tick":0
+};
+
+function setMessage(content,duration) {
+	message.content = content;
+	message.duration = duration * framerate;
+	message.tick = 0;
+}
+
+function messageTick() {
+	if (message.content == "") {
+		return;
+	}
+	if (message.tick == message.content) {
+		message.content = "";
+	} else {
+		message.tick++;
+	}
+	document.getElementById("message").innerHTML = message.content;
+}
+
+
 
 //recipes
 var recipes = {
@@ -190,23 +223,24 @@ var inventory = {
 	}
 ]};
 
-var appliances = {
-	"appliances":[
+var appliances = [
 	{
 		"name":"pan",
 		"tlx":497,
 		"tly":300,
 		"brx":916,
-		"bry":427
+		"bry":427,
+		"contents":[]
 	},
 	{
 		"name":"mixer",
-		"tlx":403,
-		"tly":57,
-		"brx":428,
-		"bry":127
+		"tlx":282,
+		"tly":70,
+		"brx":386,
+		"bry":144,
+		"contents":[]
 	}
-]};
+];
 
 function arrayCompare(_arr1, _arr2) {
     if (
@@ -292,6 +326,15 @@ function makeLooseItem(name,x,y) {
 	console.log("new loose item '" + temp.name + "' at " + temp.x + "," + temp.y);
 }
 
+function getAppliance() {
+	for (let i = 0; i < appliances.length; i++) {
+		if (appliances[i].tlx < mouseX && mouseX < appliances[i].brx && appliances[i].tly < mouseY && mouseY < appliances[i].bry) {
+			return i;
+		}
+	}
+	return -1;
+}
+
 function processLooseItems() {
 	var toDelete = [];
 	for (let i = 0; i < looseItems.length; i++) {
@@ -320,7 +363,7 @@ function processLooseItems() {
 			}
 			
 			if (looseItems[i].yv < maxVel) { //still accelerating
-				console.log("yv is under maxVel");
+				//console.log("yv is under maxVel");
 
 				looseItems[i].yv = looseItems[i].yv * gravityMod;
 			} else {
@@ -399,8 +442,11 @@ function drawLooseItems() {
 	//let mouseX = parseInt(document.getElementById("mouseX").innerHTML);
 	//let mouseY = document.getElementById("mouseY").innerHTML.toString();
 	for (let i = 0;i < looseItems.length; i++) {
-		width = (looseItems[i].targetY - looseItems[i].y) / 10;
-		drawEllipse(looseItems[i].x + width / 2,looseItems[i].targetY + 20,32 - width,16);
+		if (looseItems[i].y < looseItems[i].targetY + maxVel) {
+			width = (looseItems[i].targetY - looseItems[i].y) / 10;
+			drawEllipse(looseItems[i].x + width / 2,looseItems[i].targetY + 20,32 - width,16);
+		}
+
 		drawIcon(looseItems[i].name,looseItems[i].x,looseItems[i].y);
 	}
 }
@@ -411,7 +457,7 @@ function drawStatusBar() {
 	let spacing = 6;
 	let hotbarWidth = 7;
 	if (mouseJustDown) {
-		console.log("mouse at " + mouseX + "," + mouseY);
+		//console.log("mouse at " + mouseX + "," + mouseY);
 	}
 	for (let i = 0; i < hotbarWidth; i++) {
 		//console.log("at " + i + ", mouse needs to be between (" + (tlx + i * (32 + spacing)) + "," + tly + ") and (" + (tlx + 32 + i * (32 + spacing)) + "," + (tly + 32) + ")");
@@ -494,6 +540,28 @@ function processes() {
 		mouseJustUp = false;
 		console.log("# of loose items: " + looseItems.length);
 	}
+	if (mouseJustUp && selectedLooseItem != -1) {
+		let currAppliance = getAppliance();
+		if (currAppliance != -1) {
+			console.log("put " + looseItems[selectedLooseItem].name + " in " + appliances[currAppliance].name);
+			
+			appliances[currAppliance].contents.push(looseItems[selectedLooseItem].name);
+			let tempLoose = looseItems[selectedLooseItem];
+			looseItems.splice(selectedLooseItem);
+			selectedLooseItem = -1;
+			
+			setMessage(appliances[currAppliance].contents + " is in " + appliances[currAppliance].name,3);
+			/*
+			if (appliances[currAppliance].contents.includes(looseItems[selectedLooseItem].name)) {
+			
+			} else {
+				appliances[currAppliance].contents.push(looseItems[selectedLooseItem].name);
+			}
+			*/
+			
+		}
+		mouseJustUp = false;
+	}
 	drawStatusBar();
 	if (mouseJustDown && selectedItem == -1) {
 		selectedLooseItem = getLooseHover();
@@ -503,7 +571,7 @@ function processes() {
 		selectedItem = -1;
 		selectedLooseItem = -1;
 	}
-	
+	messageTick();
 	processLooseItems();
 }
 
@@ -515,7 +583,7 @@ var mainloop = setInterval(function() {
 	if (1 == 0) {
 		clearInterval(mainloop);
 	}
-},30);
+},framerate);
 
 </script>
 	
