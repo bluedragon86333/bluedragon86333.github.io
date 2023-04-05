@@ -60,8 +60,8 @@ function getPosition(event){
 	x = Math.round(x / 2);
 	y = Math.round(y / 2);
 	
-	mouseX = x.toString();
-	mouseY = y.toString();
+	mouseX = x;
+	mouseY = y;
     document.getElementById("mouseCoords").innerHTML = "Mouse at (" + x.toString() + "," + y.toString() + ")";
 	//document.getElementById("mouseX").innerHTML = x;
 	//document.getElementById("mouseY").innerHTML = y;
