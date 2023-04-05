@@ -415,11 +415,18 @@ function drawEllipse(x, y, w, h) {
   context.fill();
 }
 
-function drawIcon(foodName,x,y,width,height) {
+function drawIcon(foodName,x,y,width,height,shadow) {
 	for (let i = 0; i < images.length; i++) {
 		if (images[i][0] == foodName) {
 			if (arguments.length == 3) {
 				context.drawImage(images[i][1], x, y); 
+			} else if (arguments.length == 6) {
+				/*if (shadow) {
+					context.filter = "brightness(2000%)";
+					context.drawImage(images[i][1], x - 2, y - 2,width + 4,height + 4);
+					context.filter = "brightness(100%)";
+				}*/
+				context.drawImage(images[i][1], x, y,width,height); 
 			} else if (arguments.length == 5) {
 				context.drawImage(images[i][1], x, y,width,height); 
 			}
@@ -446,7 +453,7 @@ function drawLooseItems() {
 			width = (looseItems[i].targetY - looseItems[i].y) / 10;
 			drawEllipse(looseItems[i].x + width / 2,looseItems[i].targetY + 20,32 - width,16);
 		}
-
+		
 		drawIcon(looseItems[i].name,looseItems[i].x,looseItems[i].y);
 	}
 }
@@ -487,7 +494,7 @@ function drawStatusBar() {
 		}
 		
 		if (selectedItem == i && mouseDown) {
-			drawIcon(inventory.inventory[i].name,mouseX,mouseY);
+			drawIcon(inventory.inventory[i].name,mouseX,mouseY,true);
 		}
 		
 		
