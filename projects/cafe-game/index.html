@@ -2,8 +2,8 @@
 	<title>Burrow's cafe game</title>
 	<style>
 #game-canvas {
-	width:1024px;
-	height:576px;
+	width:896px;
+	height:512px;
 	background-color:#efefef;
 	image-rendering: -moz-crisp-edges;
 	image-rendering: -webkit-crisp-edges;
@@ -64,7 +64,7 @@ p {
 	<p id="lastLoose">Drop an object to see its deets bro</p>
 	<div class="center" id="game-div">
 		<h2 id="message">  </h2>
-		<canvas width="512" height="288" id="game-canvas" ></canvas>
+		<canvas width="448" height="256" id="game-canvas" ></canvas>
 	</div>
 	
 <script>
@@ -95,8 +95,8 @@ var framerate = 30;
 var selectedItem = -1;
 var selectedLooseItem = -1;
 var counter = {
-	"minY":140,
-	"maxY":218
+	"minY":108,
+	"maxY":180
 };
 
 //image global vars	
@@ -226,21 +226,68 @@ var inventory = {
 var appliances = [
 	{
 		"name":"pan",
-		"tlx":497,
-		"tly":300,
-		"brx":916,
-		"bry":427,
+		"tlx":227,
+		"tly":100,
+		"brx":320,
+		"bry":139,
 		"contents":[]
 	},
 	{
 		"name":"mixer",
-		"tlx":282,
-		"tly":70,
+		"tlx":236,
+		"tly":17,
 		"brx":386,
 		"bry":144,
 		"contents":[]
 	}
 ];
+
+var buttons = [
+	
+];
+var buttonHover = -1;
+
+function makeButton(id,tlx,tly,width,height,text,visible) {
+	let temp = {
+		"id":"",
+		"tlx":0,
+		"tly":0,
+		"width":32,
+		"height":16,
+		"text":"",
+		"visible":false
+	};
+	temp.id = id;
+	temp.tlx = tlx;
+	temp.tly = tly;
+	temp.width = width;
+	temp.height = height;
+	temp.text = text;
+	temp.visible = visible;
+	
+	buttons.push(temp);
+}
+function processButtonClick() {
+	if (getButtonHover() != -1) {
+		if (mouseDown) {
+			switch(buttons[buttonHover].id) {
+				case
+			
+			}
+		}
+	}
+}
+
+function getButtonHover() {
+	for (let i = 0; i < buttons.length; i++) {
+		if (buttons[i].tlx < mouseX && mouseX < buttons[i].tlx + buttons[i].width && buttons[i].tly < mouseY && mouseY < buttons[i].tly + buttons[i].height) {
+			buttonHover = i;
+			return i;
+		}
+	}
+	buttonHover = -1;
+	return -1;
+}
 
 function arrayCompare(_arr1, _arr2) {
     if (
@@ -420,7 +467,7 @@ function drawIcon(foodName,x,y,width,height,shadow) {
 		if (images[i][0] == foodName) {
 			if (arguments.length == 3) {
 				context.drawImage(images[i][1], x, y); 
-			} else if (arguments.length == 6) {
+			} else if (arguments.length >= 5) {
 				/*if (shadow) {
 					context.filter = "brightness(2000%)";
 					context.drawImage(images[i][1], x - 2, y - 2,width + 4,height + 4);
@@ -453,14 +500,17 @@ function drawLooseItems() {
 			width = (looseItems[i].targetY - looseItems[i].y) / 10;
 			drawEllipse(looseItems[i].x + width / 2,looseItems[i].targetY + 20,32 - width,16);
 		}
-		
-		drawIcon(looseItems[i].name,looseItems[i].x,looseItems[i].y);
+		if (getLooseHover() == i) {
+			drawIcon(looseItems[i].name,looseItems[i].x,looseItems[i].y,34,34);
+		} else {
+			drawIcon(looseItems[i].name,looseItems[i].x,looseItems[i].y,32,32);
+		}
 	}
 }
 
-function drawStatusBar() {
+function drawStatusBar() { //draws the status bar, obviously
 	let tlx = 120;
-	let tly = 242;
+	let tly = 212;
 	let spacing = 6;
 	let hotbarWidth = 7;
 	if (mouseJustDown) {
@@ -494,7 +544,7 @@ function drawStatusBar() {
 		}
 		
 		if (selectedItem == i && mouseDown) {
-			drawIcon(inventory.inventory[i].name,mouseX,mouseY,true);
+			drawIcon(inventory.inventory[i].name,mouseX,mouseY);
 		}
 		
 		
@@ -505,7 +555,7 @@ function drawStatusBar() {
 	
 }
 
-function getLooseHover() {
+function getLooseHover() { //finds which loose item is being hovered over
 	for (let i = 0; i < looseItems.length; i++) {
 		let tlx = looseItems[i].x;
 		let tly = looseItems[i].y;
