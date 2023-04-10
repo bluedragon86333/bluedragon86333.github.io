@@ -34,10 +34,31 @@ function generatePassKey(strength) {
 }
 		
 function init() {
-	document.getElementById().innerHTML = generatePassKey(4);
+	document.getElementById("captcha").innerHTML = generatePassKey(4);
+}
+
+var users = [
+	{
+		"firstName":"",
+		"birthMonth":0,
+		"birthYear":0
+	},
+	{
+		"firstName":"",
+		"birthMonth":0,
+		"birthYear":0
+	}
+	
+];
+		
+function getUserByName(firstName) {
+	for (let i = 0; i < users.length; i++) {
+		if (users[i].firstName == firstName) {
+			return users[i];
+		}
+	}
 }
 		
-
 function process(form) {
 	let user = form;
 	let output = document.getElementById("output");
