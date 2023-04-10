@@ -101,7 +101,7 @@ function process(form) {
 	if (user.enterCaptcha.value == passKey) {
 		output = "well done, " + user.firstName.value + "!";
 		let userId = getUserByName(user.firstName.value);
-		if (userId = -1) { //invalid user
+		if (userId == -1) { //invalid user
 			output = "Sorry " + user.firstName.value + ", you are not in the matrix.";
 		} else { //valid user
 			output = "Congrats " + user.firstName.value + ", you're in the matrix! Too bad there's nothing to do here rn. Try again next week!";
