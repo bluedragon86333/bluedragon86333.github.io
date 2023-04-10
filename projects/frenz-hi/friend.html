@@ -40,8 +40,9 @@ function init() {
 
 function process(form) {
 	let user = form;
-	if (user.enterCaptcha.) {
-		
+	let output = document.getElementById("output");
+	if (user.enterCaptcha.value == passKey) {
+		output = "well done, " + user.firstName.value + "!";
 	}
 }
 	</script>
@@ -58,4 +59,6 @@ function process(form) {
 		<INPUT TYPE="text" id="enterCaptcha" VALUE=""><br>	
 		<input type="button" onclick="process(this.form)" value="Submit...">	
 	</form>
+			
+	<p id="output"></p>
 </body>
