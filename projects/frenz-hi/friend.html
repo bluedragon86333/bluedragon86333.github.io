@@ -36,17 +36,33 @@ function generatePassKey(strength) {
 function init() {
 	document.getElementById("captcha").innerHTML = generatePassKey(4);
 }
-
+const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+		
 var users = [
 	{
-		"firstName":"",
-		"birthMonth":0,
-		"birthYear":0
+		"firstName":"Minori",
+		"birthMonth":1,
+		"birthYear":2007
 	},
 	{
-		"firstName":"",
-		"birthMonth":0,
-		"birthYear":0
+		"firstName":"Shalin",
+		"birthMonth":2,
+		"birthYear":2007
+	},
+	{
+		"firstName":"Molly",
+		"birthMonth":4,
+		"birthYear":2007
+	},
+	{
+		"firstName":"Charlotte",
+		"birthMonth":4,
+		"birthYear":2007
+	},
+	{
+		"firstName":"Marlo",
+		"birthMonth":2,
+		"birthYear":2007
 	}
 	
 ];
@@ -54,9 +70,10 @@ var users = [
 function getUserByName(firstName) {
 	for (let i = 0; i < users.length; i++) {
 		if (users[i].firstName == firstName) {
-			return users[i];
+			return i;
 		}
 	}
+	return -1;
 }
 		
 function process(form) {
@@ -64,9 +81,19 @@ function process(form) {
 	let output = "";
 	if (user.enterCaptcha.value == passKey) {
 		output = "well done, " + user.firstName.value + "!";
+		let userId = getUserByName(user.firstName.value);
+		if (userId = -1) { //invalid user
+			output = "Sorry " + user.firstName.value + ", you are not in the matrix.";
+		} else { //valid user
+			output = "Congrats " + user.firstName.value + ", you're in the matrix! Too bad there's nothing to do here rn. Try again next week!";
+			output += "<br>You were born in " + months[users[userId].birthMonth - 1] + " " + users[userId].birthYear + ", correct?";
+			output += "<br>Don't answer that it was rhetorical. Call me if it's wrong";
+		}
 	} else {
 		output = "Incorrect. Captcha not passed, you bot.";
 	}
+	
+	
 	document.getElementById("output").innerHTML = output;
 }
 	</script>
@@ -75,10 +102,12 @@ function process(form) {
 	<form>
 		<label for="firstName">First Name:</label>
 		<INPUT TYPE="text" id="firstName" VALUE=""><br>
+		<div hidden>
 		<label for="birthMonth">Birth Month:</label>
 		<INPUT TYPE="text" id="birthMonth" VALUE=""><br>
 		<label for="birthYear">Birth Year:</label>
 		<INPUT TYPE="text" id="birthYear" VALUE=""><br>
+		</div>
 		<label for="enterCaptcha">Enter the blue number above here:</label>
 		<INPUT TYPE="text" id="enterCaptcha" VALUE=""><br>	
 		<input type="button" onclick="process(this.form)" value="Submit...">	
