@@ -55,7 +55,7 @@ function generatePassKey(strength) {
 function init() {
 	document.getElementById("captcha").innerHTML = generatePassKey(4);
 }
-const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+const months = ["","January","February","March","April","May","June","July","August","September","October","November","December"];
 		
 var users = [
 	{
@@ -110,7 +110,7 @@ function process(form) {
 			output = "Sorry " + user.firstName.value + ", you are not in the matrix.";
 		} else { //valid user
 			output = "Congrats " + user.firstName.value + ", you're in the matrix! Too bad there's nothing to do here rn. Try again next week!";
-			output = output + "<br>You were born in " + months[users[userId].birthMonth - 1] + " " + users[userId].birthYear + ", correct?";
+			output = output + "<br>You were born in " + months[users[userId].birthMonth] + " " + users[userId].birthYear + ", correct?";
 			output = output + "<br>Don't answer that it was rhetorical. Call me if it's wrong";
 		}
 	} else {
