@@ -82,6 +82,11 @@ var users = [
 		"firstName":"Marlo",
 		"birthMonth":2,
 		"birthYear":2007
+	},
+	{
+		"firstName":"Sam",
+		"birthMonth":5,
+		"birthYear":2007
 	}
 	
 ];
@@ -105,7 +110,7 @@ function process(form) {
 			output = "Sorry " + user.firstName.value + ", you are not in the matrix.";
 		} else { //valid user
 			output = "Congrats " + user.firstName.value + ", you're in the matrix! Too bad there's nothing to do here rn. Try again next week!";
-			//output = output + "<br>You were born in " + months[users[userId].birthMonth - 1] + " " + users[userId].birthYear + ", correct?";
+			output = output + "<br>You were born in " + months[users[userId].birthMonth - 1] + " " + users[userId].birthYear + ", correct?";
 			output = output + "<br>Don't answer that it was rhetorical. Call me if it's wrong";
 		}
 	} else {
@@ -116,7 +121,7 @@ function process(form) {
 	document.getElementById("output").innerHTML = output;
 }
 	</script>
-	<h1>Sup</h1>
+	<h1>Sup bro</h1>
 	<p id="captcha"></p>
 	<form>
 		<label for="firstName">First Name:</label>
