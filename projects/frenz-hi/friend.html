@@ -15,8 +15,8 @@
 		width:60%;	
 	}
 	
-	#id {
-		color:#ff0000;	
+	#captcha {
+		color:#0000ff;	
 	}
 </style>
 	
@@ -61,10 +61,13 @@ function getUserByName(firstName) {
 		
 function process(form) {
 	let user = form;
-	let output = document.getElementById("output");
+	let output = "";
 	if (user.enterCaptcha.value == passKey) {
 		output = "well done, " + user.firstName.value + "!";
+	} else {
+		output = "Incorrect. Captcha not passed, you bot.";
 	}
+	document.getElementById("output").innerHTML = output;
 }
 	</script>
 	<h1>Sup</h1>
