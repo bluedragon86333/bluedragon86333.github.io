@@ -43,6 +43,36 @@
 	
 	<script>
 var passKey;
+		
+const alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+		
+function decrypt(str) {
+	let out = "";
+	for (let i = 0; i < str.length; i++) {
+		let index = alphabet.indexOf(str[i]);
+		index -= i;
+		if (index < 0) {
+			index += 26;
+		}
+		out = out + alphabet[index];
+	}
+	
+	return out;
+}
+		
+function encrypt(str) {
+	let out = "";
+	for (let i = 0; i < str.length; i++) {
+		let index = alphabet.indexOf(str[i]);
+		index += i;
+		if (index > 25) {
+			index -= 26;
+		}
+		out = out + alphabet[index];
+	}
+	
+	return out;
+}
 
 function generatePassKey(strength) {
 	passKey = "";
@@ -90,6 +120,7 @@ var users = [
 	}
 	
 ];
+
 		
 function getUserByName(firstName) {
 	for (let i = 0; i < users.length; i++) {
