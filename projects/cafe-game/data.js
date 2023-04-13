@@ -110,5 +110,15 @@ var appliances = [
 		"width":0,
 		"height":0,
 		"contents":[]
+	},
+	{
+		"name":"oven",
+		"tlx":225,
+		"tly":171,
+		"brx":448,
+		"bry":256,
+		"width":0,
+		"height":0,
+		"contents":[]
 	}
 ];
