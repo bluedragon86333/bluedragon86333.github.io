@@ -1,74 +1,75 @@
-<head>
-	<title>Burrow's cafe game</title>
-	<style>
-#game-canvas {
-	width:896px;
-	height:512px;
-	background-color:#efefef;
-	image-rendering: -moz-crisp-edges;
-	image-rendering: -webkit-crisp-edges;
-	image-rendering: pixelated;
-	background-image:url("./img/background.png");
-	background-size:contain;
-	margin: auto;
-}
+	<head>
+		<title>Burrow's cafe game</title>
+		<style>
+	#game-canvas {
+		width:896px;
+		height:512px;
+		background-color:#efefef;
+		image-rendering: -moz-crisp-edges;
+		image-rendering: -webkit-crisp-edges;
+		image-rendering: pixelated;
+		background-image:url("./img/background.png");
+		background-size:contain;
+		margin: auto;
+	}
 
-.center {
-	margin:auto;
-	text-align:center;
-}
+	.center {
+		margin:auto;
+		text-align:center;
+	}
 
-p { 
-	user-select: none;
-}
-#game-div {
-	margin:auto;
-}
-	</style>
+	p { 
+		user-select: none;
+	}
+	#game-div {
+		margin:auto;
+	}
+		</style>
 
-</head>
-<body onload="init()">
-	
-	<div hidden>
-	<form>
-		<h2>Ingredients</h2>
-		<input type="checkbox" id="flour_box" value="flour">
-		<label for="flour_box">Flour</label><br>
-		<input type="checkbox" id="sugar_box" value="sugar">
-		<label for="sugar_box">Sugar</label><br>
-		<input type="checkbox" id="water_box" value="water">
-		<label for="water_box">Water</label><br>
-		<input type="checkbox" id="dough_box" value="dough">
-		<label for="dough_box">Dough</label><br>
-		<br>
-		<h2>Where to put?</h2>
-		<input type="radio" id="combine_radio" value="combine">
-		<label for="combine_radio">(Combine)</label><br>
-		<input type="radio" id="pot_radio" value="pot">
-		<label for="pot_radio">Pot</label><br>
-		<input type="radio" id="pan_radio" value="pan">
-		<label for="pan_radio">Pan</label><br>
-		<input type="radio" id="oven_radio" value="oven">
-		<label for="oven_radio">Oven</label>
+	</head>
+	<body onload="init()">
+		
+		<div hidden>
+		<form>
+			<h2>Ingredients</h2>
+			<input type="checkbox" id="flour_box" value="flour">
+			<label for="flour_box">Flour</label><br>
+			<input type="checkbox" id="sugar_box" value="sugar">
+			<label for="sugar_box">Sugar</label><br>
+			<input type="checkbox" id="water_box" value="water">
+			<label for="water_box">Water</label><br>
+			<input type="checkbox" id="dough_box" value="dough">
+			<label for="dough_box">Dough</label><br>
+			<br>
+			<h2>Where to put?</h2>
+			<input type="radio" id="combine_radio" value="combine">
+			<label for="combine_radio">(Combine)</label><br>
+			<input type="radio" id="pot_radio" value="pot">
+			<label for="pot_radio">Pot</label><br>
+			<input type="radio" id="pan_radio" value="pan">
+			<label for="pan_radio">Pan</label><br>
+			<input type="radio" id="oven_radio" value="oven">
+			<label for="oven_radio">Oven</label>
 
-		<input type="button" onclick="process()" value="Submit">
-	</form>
-	
-	<p id="chosenIngredients">Output</p>
-	<p id="finalFoodResult">Final Food</p>
-	</div>
-	
-	<p id="mouseCoords">Click canvas for mouse coords</p>
-	<p hidden><b id="mouseX"></b>,<b id="mouseY"></b></p>
-	<p id="mouseDown">mouseDown = false</p>
-	<p id="lastLoose">Drop an object to see its deets bro</p>
-	<div class="center" id="game-div">
-		<h2 id="message">  </h2>
-		<canvas width="448" height="256" id="game-canvas" ></canvas>
-	</div>
-	
-<script src="main.js"></script>
-<script src="mouse.js"></script>
-<script src="buttons.js"></script>
-
-</body>
+			<input type="button" onclick="process()" value="Submit">
+		</form>
+		
+		<p id="chosenIngredients">Output</p>
+		<p id="finalFoodResult">Final Food</p>
+		</div>
+		
+		<p id="mouseCoords">Click canvas for mouse coords</p>
+		<p hidden><b id="mouseX"></b>,<b id="mouseY"></b></p>
+		<p id="mouseDown">mouseDown = false</p>
+		<p id="lastLoose">Drop an object to see its deets bro</p>
+		<div class="center" id="game-div">
+			<h2 id="message">  </h2>
+			<canvas width="448" height="256" id="game-canvas" ></canvas>
+		</div>
+		
+	<script src="main.js"></script>
+	<script src="mouse.js"></script>
+	<script src="looseItems.js"></script>
+	<script src="data.js"></script>
+	<script src="buttons.js"></script>
+	</body>
