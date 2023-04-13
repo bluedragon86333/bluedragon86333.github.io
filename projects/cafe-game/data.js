@@ -103,8 +103,8 @@ var appliances = [
 	},
 	{
 		"name":"mixer",
-		"tlx":236,
-		"tly":17,
+		"tlx":231,
+		"tly":14,
 		"brx":386,
 		"bry":144,
 		"width":0,

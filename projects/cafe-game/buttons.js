@@ -19,14 +19,15 @@ function makeButton(id,tlx,tly,width,height,text) {
 		"text":"",
 		"visible":false
 	};
+	
+	
 	temp.id = id;
 	temp.tlx = tlx;
 	temp.tly = tly;
-	temp.width = width;
-	temp.height = height;
 	temp.text = text;
 	temp.visible = true;
-	
+	temp.width = width;
+	temp.height = height;
 	buttons.push(temp);
 }
 function processButtonClick() { //checks if button was clicked

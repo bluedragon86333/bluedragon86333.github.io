@@ -1,4 +1,31 @@
 
+function makeLooseItem(name,x,y) {
+	let temp = {
+		"name":name,
+		"x":x,
+		"y":y,
+		"yv":1,
+		"targetY":-1
+	};
+	looseItems.push(temp);
+	console.log("new loose item '" + temp.name + "' at " + temp.x + "," + temp.y);
+	console.log("# of loose items: " + looseItems.length);
+	if (looseItems.length > 0) {
+		makeButton("clearScrn",4,4,64,32,"Clear");
+	}
+}
+
+function getAppliance() { //returns id of appliance you're hovering over
+	for (let i = 0; i < appliances.length; i++) {
+		if (appliances[i].tlx < mouseX && mouseX < appliances[i].brx && appliances[i].tly < mouseY && mouseY < appliances[i].bry) {
+			return i;
+		}
+	}
+	return -1;
+}
+
+
+
 function processLooseItems() {
 	var toDelete = [];
 	for (let i = 0; i < looseItems.length; i++) {

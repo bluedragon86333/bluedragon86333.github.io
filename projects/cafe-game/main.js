@@ -36,31 +36,6 @@ const context = canvas.getContext('2d');
 context.imageSmoothingEnabled= false;
 var background = new Image();
 
-var message = {
-	"content":"",
-	"duration":0,
-	"tick":0
-};
-
-function setMessage(content,duration) {
-	message.content = content;
-	message.duration = duration * framerate;
-	message.tick = 0;
-}
-
-function messageTick() {
-	if (message.content == "") {
-		return;
-	}
-	if (message.tick == message.duration) {
-		message.content = "";
-	} else {
-		message.tick++;
-	}
-	document.getElementById("message").innerHTML = message.content;
-}
-
-
 
 
 function initAppliances() {
@@ -83,16 +58,17 @@ function getApplianceIdWithName(name) {
 
 function checkValidRecipe(appliance) { //input appliance name
 	console.log("checking valid recipe...");
-	let applianceId = getApplianceIdWithName();
+	let applianceId = getApplianceIdWithName(appliance);
+	console.log("applianceId: " + applianceId);
 	if (applianceId == -1) {
 		return;
 	}
-	console.log("applianceId: " + applianceId);
+	let finalFood = "nope";
 	let oldIngredients = appliances[applianceId].contents;	
 	let selectedIngredients = [];
 	for (const i of oldIngredients) { //consolidates duplicate ingredients in appliance
-		if (!selectedIngredients.includes(oldIngredients[i])) {
-			selectedIngredients.push(oldIngredients[i]);
+		if (!selectedIngredients.includes(i)) {
+			selectedIngredients.push(i);
 		}
 	}
 	console.log("selectedIngredients: " + selectedIngredients);
@@ -105,11 +81,16 @@ function checkValidRecipe(appliance) { //input appliance name
 			}
 		}
 	}
-	if (finalFood == "") {
+	if (finalFood == "nope") {
 		finalFood = "complete shit";
+		setMessage("wow you fucked up",3);
+	} else {
+		setMessage("you made dough!",3);
+		makeLooseItem("dough",appliances[applianceId].tlx,appliances[applianceId].tly);
 	}
 	
-	makeLooseItem("dough",appliances[applianceId].tlx,appliances[applianceId].tly);
+	
+	appliances[applianceId].contents = [];
 }
 
 function arrayCompare(_arr1, _arr2) {
@@ -184,31 +165,17 @@ var looseItems = [];
 var maxVel = 6;
 var gravityMod = 1.05;
 
-function makeLooseItem(name,x,y) {
-	let temp = {
-		"name":name,
-		"x":x,
-		"y":y,
-		"yv":1,
-		"targetY":-1
-	};
-	looseItems.push(temp);
-	console.log("new loose item '" + temp.name + "' at " + temp.x + "," + temp.y);
-	if (looseItems.length > 0) {
-		makeButton("clearScrn",4,4,64,32,"Clear");
-	}
-}
-
-function getAppliance() { //returns id of appliance you're hovering over
-	for (let i = 0; i < appliances.length; i++) {
-		if (appliances[i].tlx < mouseX && mouseX < appliances[i].brx && appliances[i].tly < mouseY && mouseY < appliances[i].bry) {
-			return i;
-		}
-	}
-	return -1;
-}
-
 var images = [];
+
+function addImage(name) {
+	let temp = new Image();
+	temp.src = imgRoot + name + ".png";
+	temp.onload = () => {
+		let tempArr = [name,temp];
+		images.push(tempArr);
+	};
+}
+
 function loadImages() {
 	for (let i = 0; i < recipes.recipes.length;i++) {
 		let temp = new Image();
@@ -218,7 +185,9 @@ function loadImages() {
 			images.push(tempArr);
 		};
 	}
-
+	addImage("mixing_bowl_unmixed");
+	addImage("mixing_bowl_finished");
+	addImage("mixing_bowl_empty");
 }
 
 
@@ -298,6 +267,7 @@ function drawStatusBar() { //draws the status bar, obviously
 					selectedItem = i;
 					console.log("selectedItem: " + inventory.inventory[i].name);
 					makeLooseItem(inventory.inventory[i].name,mouseX - 5,mouseY - 5);
+					selectedLooseItem = looseItems.length - 1;
 				}
 				
 			}
@@ -321,12 +291,35 @@ function drawStatusBar() { //draws the status bar, obviously
 	
 }
 
+function drawAppliances() {
+	let curr = appliances[getApplianceIdWithName("mixer")];
+	if (getAppliance() == getApplianceIdWithName("mixer")) {
+		curr.width += 4;
+		curr.height += 4;
+		curr.tlx -= 2;
+		curr.tly -= 2;
+	}
+	if (curr.contents.length == 0) {
+		
+		drawIcon("mixing_bowl_empty",curr.tlx,curr.tly,curr.width,curr.height);
+	} else {
+		drawIcon("mixing_bowl_unmixed",curr.tlx,curr.tly,curr.width,curr.height);
+	}
+	if (getAppliance() == getApplianceIdWithName("mixer")) {
+		curr.width -= 4;
+		curr.height -= 4;
+		curr.tlx += 2;
+		curr.tly += 2;
+	}
+}
 
 function drawAll() {
 	//context.drawImage(background,0,0,256,144);     
-	
+	drawAppliances();
 	drawLooseItems();
 	drawButtons();
+	
+
 	//drawStatusBar();
 }
 
@@ -340,9 +333,8 @@ function init() {
 function processes() {
 	processButtonClick();
 	if (mouseJustUp && selectedItem != -1) {
-		makeLooseItem(inventory.inventory[selectedItem].name,mouseX,mouseY);
+		//makeLooseItem(inventory.inventory[selectedItem].name,mouseX,mouseY);
 		mouseJustUp = false;
-		console.log("# of loose items: " + looseItems.length);
 	}
 	if (mouseJustUp && selectedLooseItem != -1) {
 		let currAppliance = getAppliance();
@@ -378,6 +370,21 @@ function processes() {
 	}
 	messageTick();
 	processLooseItems();
+	
+	let hoverAppliance = -1;
+	for (const i of appliances) {
+		if (i.tlx < mouseX && mouseX < i.brx) {
+			if (i.tly < mouseY && mouseY < i.bry) {
+				hoverAppliance = i;
+			}
+		}
+	}
+	if (hoverAppliance == -1) {
+		document.getElementById("currentApplianceHover").innerHTML = "You are hovering over: nothing";
+	} else {
+		document.getElementById("currentApplianceHover").innerHTML = "You are hovering over: " + hoverAppliance.name;
+	}
+	
 }
 
 var mainloop = setInterval(function() {
