@@ -2,9 +2,6 @@
 <head>
 <title>;)</title>
 <style>
-	* {
-		cursor: none;
-	}
 	
 	@font-face {
 		font-family: 'SegoeUI'; /*a name to be used later*/
@@ -47,9 +44,10 @@
 </head>
 <body onclick="changeURL()">
 <script>
+var destination = "./tech-usage.html";
 document.addEventListener('contextmenu', event => event.preventDefault());
 	function changeURL() {
-		window.location.replace("./rickroll-UI.html");
+		window.location.replace(destination);
 	}
 
 	document.addEventListener('contextmenu', event => event.preventDefault());
@@ -90,12 +88,12 @@ document.body.onkeydown = function(e) {
       e.keyCode == 16 || //shift
       e.keyCode == 13 //enter
   ) {
-    window.location.replace("./rickroll-UI.html");
+    window.location.replace("destination");
   }
 }
 
 function changeURL() {
-	window.location.replace("./rickroll-UI.html");
+	window.location.replace("destination");
 }
 
 
