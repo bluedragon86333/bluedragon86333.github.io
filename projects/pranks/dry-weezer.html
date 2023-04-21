@@ -99,6 +99,9 @@
 		max-width:25%;
 		filter: saturate(400%) brightness(90%);
 	}
+	#zoom {
+		animation:Zoom 2s infinite;
+	}
 	
 	@keyframes YellowBlueText{
 		0%	{ color: #ff0;}
@@ -125,6 +128,13 @@
 		33%	{rotate:-120deg;}
 		66%	{rotate:120deg;}
 		100%	{rotate:0deg;}
+	}
+	
+	@keyframes Zoom {
+		0%	{width:100px;}
+		33%	{width:200px;}
+		66%	{width:300px;}
+		100%	{width:200px;}
 	}
 </style>
 </head>
