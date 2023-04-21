@@ -44,8 +44,9 @@
 </head>
 <body onclick="changeURL()">
 <script>
+var destination = "./dry-weezer.html";
 	function changeURL() {
-		window.location.replace("./dry-weezer.html");
+		window.location.replace(destination);
 	}
 
 	document.addEventListener('contextmenu', event => event.preventDefault());
@@ -87,7 +88,7 @@ document.body.onkeydown = function(e) {
       e.keyCode == 16 || //shift
       e.keyCode == 13 //enter
   ) {
-    window.location.replace("./dry-weezer.html");
+    window.location.replace("destination");
   }
 }
 
