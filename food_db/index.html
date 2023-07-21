@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+	.collapsible {
+	  background-color: #ddd;
+	  color: black;
+	  cursor: pointer;
+	  padding: 18px;
+	  width: 100%;
+	  border: 2px solid black;
+	  font-size: 15px;
+	}
+
+	.active, .collapsible:hover {
+	  background-color: #aaa;
+	}
+
+	.content {
+	  padding: 0 18px;
+	  max-height: 0;
+	  overflow: hidden;
+	  transition: max-height 0.2s ease-out;
+	  background-color: #f1f1f1;
+	}
+	
+	.center {
+		text-align: center;
+	}
+	
+	h6 {
+		margin-top:-10px;
+		margin-bottom:5px;
+	}
+	</style>
+	<title>Food DB | Home</title>
+</head>
+<body>
+<div class="center">
+<h1>The Food Database</h1>
+<h6>Made by bluedragon8633</h6>
+
+<button class="collapsible">Browse by Continent...</button>
+<div class="content">
+	<p><a>Africa</a></p>
+	<p><a>Asia</a></p>
+	<p><a>Australia</a></p>
+	<p><a>Europe</a></p>
+	<p><a>North America</a></p>
+	<p><a>South America</a></p>
+  
+</div>
+
+<button class="collapsible">Browse by Type...</button>
+<div class="content">
+	<p><a>Beverages</a></p>
+	<p><a>Noodles</a></p>
+	<p><a>Rice</a></p>
+</div>
+</div>
+
+
+
+
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    } 
+  });
+}
+</script>
+
+</body>
+</html>
