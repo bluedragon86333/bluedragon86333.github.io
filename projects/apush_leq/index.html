@@ -1,0 +1,36 @@
+<head>
+	
+</head>
+<body>
+	<script>
+		var prompts = [
+						[": Explain how intellectual and religious movements impacted the development of colonial North America from 1607 to 1776.","Explain how trans-Atlantic trade and Great Britain’s mercantilist policies impacted the economic development of the British North America in the period from 1650 to 1750.","Explain how the existence of slavery impacted the development of Britain’s North American colonies from 1607 to 1776.","Explain the causes and consequences of the existence of slavery in the development of Britain’s North American colonies prior to the American Revolution."], 
+					   ["Explain how the French and Indian War impacted the relationship between Great Britain and the British colonies from 1754 to 1776.","Evaluate the extent to which the French and Indian War was a turning point in American History."],
+					   ["Compare and contrast views of the role of the federal government and westward expansion between different regional political leaders 1800 to 1848.","Compare and contrast views of the role of the federal government and westward expansion between different political parties from 1800 to 1848.","Evaluate the causes and consequences of the growing opposition to slavery in the United States from 1776 to 1856.","Evaluate the extent to which the opposition to slavery contributed to maintaining continuity as well as fostered change in the United States from 1776 to 1856.","Evaluate the extent to which American foreign policy contributed to maintaining continuity as well as fostered change with regard to United States involvement in world affairs from 1796 to 1823."],
+					   ["Evaluate the extent to which increased democracy contributed to maintaining continuity as well as fostered change in the first half of the United States.","Explain the major causes and consequences for the increased democracy in the first half of the United States.","Explain the ways in which controversy over the extension of slavery into western territories contributed to the causes of the Civil War from 1800 to 1860.","Explain the ways in which the growth of slavery contributed to the coming of the Civil War from 1800 to 1860."]
+						["Evaluate the political, economic, and social reactions of Americans to the end of Reconstruction (1877)."," Evaluate the political, economic, and social reactions of African Americans to the end of Reconstruction (1877).","Evaluate the extent to which the goals of Reconstruction (1865 – 1877) regarding African Americans were achieved by 1900. Be sure to address both continuities as well as changes during this time period.","Evaluate the extent to which the goals of Reconstruction (1865 – 1877) contributed to maintaining continuity as well as fostered change before 1900."],
+						["Explain the major causes and consequences for the cultural conflicts of the 1920’s in the United States.","Evaluate the extent to which the 1920’s were a cultural turning point in American History.","Compare and contrast reactions of Americans to immigration in the 1840s-1850s with immigration in the 1910s-1920s.","Compare and contrast the home front experiences between minority Americans during the Second World War.","Compare and contrast the home front experiences of women and minorities during the Second World War. "],
+						["Evaluate the extent to which US foreign policy goals contributed to maintaining continuity as well as fostered change from the end of WWI (1918) to the end of the Korean War (1953).","Evaluate the extent to which policy goals of the conservatives in the 1950's impacted social, economic, and foreign policy by the 1980’s.","Evaluate the extent to which the goals of conservatives contributed to maintaining continuity as well as fostered change from the 1950s through the 1980s.","Compare and contrast domestic and foreign policy goals of conservatives in the 1950’s with conservatives in the 1980’s."],
+						["Compare and contrast the patterns of immigration and the American response to those immigrants in two of the following periods, 1820 to 1860, 1880 to 1924, and 1965 to 2000.","Explain the ways that technological advances and war maintained continuity as well as fostered change in the lives of women in the United States during the twentieth century. ","Explain the effects of popular culture on the lives of women in the United States in the twentieth century.","Explain the ways that popular culture maintained continuity as well as fostered change in the lives of women in the United States during the twentieth century."]
+		];
+
+			function generatePeriod(period) {
+				document.getElementById("prompt").innerHTML = prompts[period - 2][Math.floor(Math.random() * prompts[period - 2])];
+			}
+
+			function generateAny() {
+				
+			}
+	</script>
+	<h1>APUSH LEQ prompt generations</h1>
+	<button onclick="generatePeriod(2)">1607-1754</button>
+	<button onclick="generatePeriod(3)">1754-1800</button>
+	<button onclick="generatePeriod(4)">1800-1848</button>
+	<button onclick="generatePeriod(5)">1848-1877</button>
+	<button onclick="generatePeriod(6)">1865-1898</button>
+	<button onclick="generatePeriod(7)">1898-1945</button>
+	<button onclick="generatePeriod(8)">1945-1980</button>
+	<button onclick="generatePeriod(9)">1980-Present</button>
+	<button onclick="generateAny()">Any Time Period</button>
+	<p id="prompt"></p>
+</body>
